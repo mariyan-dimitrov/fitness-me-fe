@@ -1,0 +1,11 @@
+{
+  "PAGE_NAMES": {
+    "HOMEPAGE": "Homepage",
+    "LOGIN": "Login",
+    "REGISTER": "Register"
+  },
+
+  "MAIN_MENU": {
+    "TOGGLE_THEME": "Toggle theme"
+  }
+}

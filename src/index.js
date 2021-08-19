@@ -1,17 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { initReactI18next } from "react-i18next";
+import Backend from "i18next-xhr-backend";
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom";
+import i18next from "i18next";
+
+import App from "./App";
+
+i18next
+  .use(Backend)
+  .use(initReactI18next)
+  .init({
+    debug: false,
+    lng: "en",
+    fallbackLng: "en",
+    interpolation: {
+      escapeValue: false,
+    },
+    backend: {
+      crossDomain: true,
+      loadPath: `${window.location.origin}/locales/{{lng}}/translation.json`,
+    },
+  });
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Suspense fallback={null}>
+      <App />
+    </Suspense>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
