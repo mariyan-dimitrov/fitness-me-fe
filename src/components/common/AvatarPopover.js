@@ -25,16 +25,19 @@ import { useCookieContext } from "../contexts/CookieContext";
 import { useThemeContext } from "../contexts/ThemeContext";
 import useTranslate from "../hooks/useTranslate";
 import Radio from "../forms/fields/Radio";
+import Switch from "../forms/fields/Switch";
+import useChangeLanguage from "../hooks/useChangeLanguage";
 
 const AvatarPopover = () => {
   const { removeCookie } = useCookieContext();
-  const { user } = useGlobalContext();
+  const { user, lang } = useGlobalContext();
   const { theme, themeColor, muiTheme, availableColors, toggleTheme, setThemeColor } =
     useThemeContext();
   const [showUserPopover, setShowUserPopover] = useState(false);
   const avatarRef = useRef();
   const i18n = useTranslate();
   const togglePopover = () => setShowUserPopover(prev => !prev);
+  const changeLanguage = useChangeLanguage();
 
   return (
     <Wrap>
@@ -55,6 +58,12 @@ const AvatarPopover = () => {
         </ListItemIcon>
         <ListItemText primary={i18n("MAIN_MENU.TOGGLE_THEME")} />
       </ListItem>
+
+      <Switch
+        label="Lang"
+        checked={lang === "en"}
+        onChange={() => changeLanguage(lang === "en" ? "bg" : "en")}
+      />
 
       <Popover
         id={showUserPopover ? "simple-popover" : undefined}

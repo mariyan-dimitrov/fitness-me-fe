@@ -1,4 +1,3 @@
-import React from "react";
 import { Checkbox as MuiCheckbox, FormControlLabel } from "@material-ui/core";
 
 const Checkbox = ({ label, labelPlacement, ...rest }) => (

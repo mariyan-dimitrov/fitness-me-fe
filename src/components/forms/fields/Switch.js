@@ -1,4 +1,3 @@
-import React from "react";
 import { Switch as MuiSwitch, FormControlLabel } from "@material-ui/core";
 
 const Switch = ({ label, labelPlacement, checked, onChange, ...rest }) => (

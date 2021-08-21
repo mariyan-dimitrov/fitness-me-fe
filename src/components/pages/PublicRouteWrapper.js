@@ -1,26 +1,39 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import styled from "styled-components/macro";
 
-import { routes } from "../../_constants/routes";
 import Homepage from "./Homepage/Homepage";
+import useRoutes from "../hooks/useRoutes";
 import Register from "./Register/Register";
 import Login from "./Login/Login";
 
 const PublicRouteWrapper = () => {
+  const { routes } = useRoutes();
+
   return (
-    <Router>
+    <PageWrap>
       <Switch>
-        <Route exact path={routes.homepage}>
+        <Route exact path={routes.homepage.url}>
           <Homepage />
         </Route>
 
-        <Route exact path={routes.login}>
+        <Route path={routes.login.url}>
           <Login />
         </Route>
-        <Route exact path={routes.register}>
+
+        <Route path={routes.register.url}>
           <Register />
         </Route>
       </Switch>
-    </Router>
+    </PageWrap>
   );
 };
 export default PublicRouteWrapper;
+
+const PageWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 64px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+`;

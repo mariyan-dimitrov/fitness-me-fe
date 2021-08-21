@@ -4,6 +4,7 @@ import local_storage from "../../utils/local_storage";
 const initialState = {
   isMenuOpened: true,
   user: false,
+  lang: "en",
   ...(local_storage.get("globalContext") || {}),
 };
 
@@ -20,7 +21,7 @@ const GlobalContextProvider = ({ children }) => {
   );
 
   return (
-    <GlobalContext.Provider value={{ globalState, updateGlobalState }}>
+    <GlobalContext.Provider value={{ ...globalState, updateGlobalState }}>
       {children}
     </GlobalContext.Provider>
   );

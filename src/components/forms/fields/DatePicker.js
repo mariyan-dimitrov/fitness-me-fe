@@ -1,4 +1,3 @@
-import React from "react";
 import { format } from "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import { IconButton, InputAdornment } from "@material-ui/core";

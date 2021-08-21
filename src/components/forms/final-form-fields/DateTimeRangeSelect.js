@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { Field } from "react-final-form";
 import DateTimeRangeSelectCustom from "../fields/DateTimeRangeSelect";

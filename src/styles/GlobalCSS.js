@@ -1,4 +1,3 @@
-import React from "react";
 import { Normalize } from "styled-normalize";
 import { createGlobalStyle } from "styled-components/macro";
 
@@ -65,6 +64,10 @@ const GlobalStyle = createGlobalStyle`
   .MuiInputBase-input {
     box-shadow: 0 0 0px 1000px transparent inset;
     transition: background-color 5000s ease-in-out 0s, border-color 0.3s ease;
+  }
+
+  a {
+    color: ${({ theme }) => theme.palette.primary.light};
   }
 
   @keyframes spin {

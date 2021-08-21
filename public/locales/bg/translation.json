@@ -1,27 +1,27 @@
 {
   "PAGE_NAMES": {
     "HOMEPAGE": "Homepage",
-    "LOGIN": "Login",
-    "REGISTER": "Register"
+    "LOGIN": "Логин",
+    "REGISTER": "Регистрация"
   },
 
   "MAIN_MENU": {
-    "TOGGLE_THEME": "Toggle theme"
+    "TOGGLE_THEME": "Смени тема"
   },
   "REGISTER": {
-    "HAVE_AN_ACC": "Have an account? {{loginUrl}}",
-    "LOGIN": "Login"
+    "HAVE_AN_ACC": "Имаш акаунт? {{loginUrl}}",
+    "LOGIN": "Логин"
   },
   "LOGIN": {
-    "DONT_HAVE_AN_ACC": "Don't have an account? {{registerUrl}}",
-    "REGISTER": "Register"
+    "DONT_HAVE_AN_ACC": "Нямаш акаунт? {{registerUrl}}",
+    "REGISTER": "Регистрация"
   },
 
   "FIELD_LABELS": {
-    "EMAIL": "Email",
-    "PASSWORD": "Password",
-    "CONFIRM_PASSWORD": "Confirm Password",
-    "USERNAME": "User Name"
+    "EMAIL": "Имейл",
+    "PASSWORD": "Парола",
+    "CONFIRM_PASSWORD": "Потвърди парола",
+    "USERNAME": "Потребителско име"
   },
   "FORM_VALIDATION_MESSAGES": {
     "FIELD_IS_REQUIRED": "Field is required",

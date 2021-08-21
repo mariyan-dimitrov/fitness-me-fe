@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Select as MuiSelect, FormControl, MenuItem, InputLabel } from "@material-ui/core";
 
 import InputErrorMessage from "../../common/InputErrorMessage";

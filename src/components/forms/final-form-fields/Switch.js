@@ -1,4 +1,3 @@
-import React from "react";
 import { Field } from "react-final-form";
 import styled from "styled-components/macro";
 import MuiSwitch from "@material-ui/core/Switch";
