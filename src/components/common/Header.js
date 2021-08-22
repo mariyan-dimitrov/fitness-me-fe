@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Button, IconButton, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
 import styled from "styled-components/macro";
 import cn from "classnames";
@@ -10,10 +10,11 @@ import useRouter from "../hooks/useRouter";
 import useRoutes from "../hooks/useRoutes";
 
 const Header = () => {
-  const { isMenuOpened, isHeaderButtonActionDisabled, updateGlobalState } = useGlobalContext();
-  const { location, pushRoute, updateQuery } = useRouter();
+  const { isMenuOpened, updateGlobalState } = useGlobalContext();
+  const { location } = useRouter();
   const { routes } = useRoutes();
   const { pathname } = location;
+
   const routeData = routes[pathname.replace("/", "")];
   const hasCreateButton = routeData?.create;
 
@@ -38,25 +39,6 @@ const Header = () => {
             {usePageNameFromUrl()}
           </Typography>
         </PageName>
-
-        {hasCreateButton && (
-          <CreateButtonWrap>
-            <Button
-              color="primary"
-              variant="contained"
-              className="bo-create-asset"
-              disabled={isHeaderButtonActionDisabled}
-              onClick={() => {
-                hasCreateButton.query
-                  ? updateQuery(hasCreateButton.query)
-                  : pushRoute(hasCreateButton.url);
-              }}
-            >
-              {hasCreateButton.name}
-            </Button>
-            {routeData.description && <Description>{routeData.description}</Description>}
-          </CreateButtonWrap>
-        )}
 
         <AvatarPopover />
       </CustomToolbar>

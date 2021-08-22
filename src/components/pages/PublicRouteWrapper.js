@@ -1,7 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components/macro";
 
-import Homepage from "./Homepage/Homepage";
 import useRoutes from "../hooks/useRoutes";
 import Register from "./Register/Register";
 import Login from "./Login/Login";
@@ -12,10 +11,6 @@ const PublicRouteWrapper = () => {
   return (
     <PageWrap>
       <Switch>
-        <Route exact path={routes.homepage.url}>
-          <Homepage />
-        </Route>
-
         <Route path={routes.login.url}>
           <Login />
         </Route>
@@ -36,4 +31,8 @@ const PageWrap = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-image: url("https://d18zdz9g6n5za7.cloudfront.net/home/home-masthead-20201031-1340.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 0;
 `;

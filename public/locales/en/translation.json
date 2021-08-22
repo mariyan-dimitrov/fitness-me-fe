@@ -6,22 +6,26 @@
   },
 
   "MAIN_MENU": {
-    "TOGGLE_THEME": "Toggle theme"
+    "TOGGLE_THEME": "Toggle theme",
+    "LOGOUT": "Logout"
   },
   "REGISTER": {
     "HAVE_AN_ACC": "Have an account? {{loginUrl}}",
-    "LOGIN": "Login"
+    "LOGIN": "Login",
+    "WELCOME": "Welcome to Fitness Me"
   },
   "LOGIN": {
     "DONT_HAVE_AN_ACC": "Don't have an account? {{registerUrl}}",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "WELCOME": "Welcome to Fitness Me"
   },
 
   "FIELD_LABELS": {
     "EMAIL": "Email",
     "PASSWORD": "Password",
     "CONFIRM_PASSWORD": "Confirm Password",
-    "USERNAME": "User Name"
+    "USERNAME": "User Name",
+    "REMEMBER_ME": "Remember me"
   },
   "FORM_VALIDATION_MESSAGES": {
     "FIELD_IS_REQUIRED": "Field is required",

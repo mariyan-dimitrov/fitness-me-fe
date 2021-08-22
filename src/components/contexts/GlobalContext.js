@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState, createContext } from "react";
+import { useCallback, useContext, useState, createContext, useEffect } from "react";
 import local_storage from "../../utils/local_storage";
 
 const initialState = {
@@ -19,6 +19,10 @@ const GlobalContextProvider = ({ children }) => {
     nextState => setState(prevState => ({ ...prevState, ...nextState })),
     []
   );
+
+  useEffect(() => {
+    local_storage.set("globalContext", globalState);
+  }, [globalState]);
 
   return (
     <GlobalContext.Provider value={{ ...globalState, updateGlobalState }}>

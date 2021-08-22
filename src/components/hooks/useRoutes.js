@@ -6,7 +6,6 @@ import useRouter from "./useRouter";
 const useRoutes = () => {
   const { location } = useRouter();
   const i18n = useTranslate();
-
   const { pathname } = location;
 
   const routes = {

@@ -5,11 +5,10 @@ import { Switch, Route } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 
 import { useThemeContext } from "../contexts/ThemeContext";
+import PrivateRouteWrapper from "./PrivateRouteWrapper";
 import PublicRouteWrapper from "./PublicRouteWrapper";
 import GlobalCSS from "../../styles/GlobalCSS";
-import NotFound from "./NotFound/NotFound";
 import useRoutes from "../hooks/useRoutes";
-import Header from "../common/Header";
 
 const Router = () => {
   const { muiTheme } = useThemeContext();
@@ -21,15 +20,13 @@ const Router = () => {
         <CssBaseline />
         <GlobalCSS />
 
-        <Header />
-
         <Switch>
-          <Route exact path={[routes.homepage.url, routes.login.url, routes.register.url]}>
+          <Route path={[routes.login.url, routes.register.url]}>
             <PublicRouteWrapper />
           </Route>
 
           <Route>
-            <NotFound />
+            <PrivateRouteWrapper />
           </Route>
         </Switch>
       </ThemeProvider>

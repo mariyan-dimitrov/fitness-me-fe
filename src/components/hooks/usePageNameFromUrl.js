@@ -7,7 +7,7 @@ const usePageNameFromUrl = () => {
   const { routes } = useRoutes();
 
   const [path, subPath] = pathname.replace("/", "").split("/");
-  const result = subPath ? routes[path][subPath] : routes[path] || routes.root;
+  const result = subPath ? routes[path][subPath] : routes[path] || routes.homepage;
 
   return result?.name;
 };

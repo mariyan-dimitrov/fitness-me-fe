@@ -7,16 +7,14 @@ import useValidateInput from "../../hooks/useValidateInput";
 import TextField from "../../forms/final-form-fields/TextField";
 import useTranslate from "../../hooks/useTranslate";
 import useRoutes from "../../hooks/useRoutes";
+import account from "../../api/account";
 
 const Register = () => {
   const { validateInput } = useValidateInput();
   const { routes } = useRoutes();
   const i18n = useTranslate();
 
-  const onSubmit = values => {
-    // TODO: Send request to the server
-    console.log("values: ", values);
-  };
+  const onSubmit = values => account.register(values).then(console.log).catch(console.error);
 
   const validate = formState => {
     const { userName, email, password, confirmPassword } = formState;
@@ -72,6 +70,10 @@ const Register = () => {
         render={({ handleSubmit }) => (
           <StyledPaper>
             <form onSubmit={handleSubmit}>
+              <Row className="is-aligned-center">
+                <h2>{i18n("LOGIN.WELCOME")}</h2>
+              </Row>
+
               <Row>
                 <TextField name="userName" label={i18n("FIELD_LABELS.USERNAME")} />
               </Row>
@@ -133,7 +135,7 @@ const StyledPaper = styled(Paper)`
 `;
 
 const Row = styled.div`
-  margin-bottom: ${({ theme }) => `${theme.spacing(2)}px`};
+  margin-bottom: ${({ theme }) => `${theme.spacing(3)}px`};
 
   &:last-of-type {
     margin-bottom: 0;

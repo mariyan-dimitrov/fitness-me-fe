@@ -23,10 +23,10 @@ import {
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { useCookieContext } from "../contexts/CookieContext";
 import { useThemeContext } from "../contexts/ThemeContext";
+import useChangeLanguage from "../hooks/useChangeLanguage";
 import useTranslate from "../hooks/useTranslate";
 import Radio from "../forms/fields/Radio";
 import Switch from "../forms/fields/Switch";
-import useChangeLanguage from "../hooks/useChangeLanguage";
 
 const AvatarPopover = () => {
   const { removeCookie } = useCookieContext();
@@ -52,19 +52,6 @@ const AvatarPopover = () => {
         </AvatarWrap>
       )}
 
-      <ListItem button onClick={toggleTheme}>
-        <ListItemIcon>
-          {theme === "dark" ? <LightIcon color="primary" /> : <DarkIcon color="primary" />}
-        </ListItemIcon>
-        <ListItemText primary={i18n("MAIN_MENU.TOGGLE_THEME")} />
-      </ListItem>
-
-      <Switch
-        label="Lang"
-        checked={lang === "en"}
-        onChange={() => changeLanguage(lang === "en" ? "bg" : "en")}
-      />
-
       <Popover
         id={showUserPopover ? "simple-popover" : undefined}
         open={showUserPopover}
@@ -78,20 +65,6 @@ const AvatarPopover = () => {
         <PopoverContent>
           <Grid item>
             <List dense>
-              <ListItem
-                button
-                onClick={() => {
-                  togglePopover();
-                }}
-              >
-                <ListItemIcon>
-                  <PersonIcon color="primary" />
-                </ListItemIcon>
-                <ListItemText primary={i18n("MAIN_MENU.EDIT_PROFILE")} />
-              </ListItem>
-
-              <Divider />
-
               <ListItem button onClick={toggleTheme}>
                 <ListItemIcon>
                   {theme === "dark" ? <LightIcon color="primary" /> : <DarkIcon color="primary" />}
@@ -119,6 +92,20 @@ const AvatarPopover = () => {
                     </Tooltip>
                   ))}
                 </RadioGroup>
+              </ListItem>
+
+              <Divider />
+
+              <ListItem className="theme-colors-wrap">
+                <ListItemIcon>
+                  <ColorLensIcon color="primary" />
+                </ListItemIcon>
+
+                <Switch
+                  label="Lang"
+                  checked={lang === "en"}
+                  onChange={() => changeLanguage(lang === "en" ? "bg" : "en")}
+                />
               </ListItem>
 
               <Divider />
