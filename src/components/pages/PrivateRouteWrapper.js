@@ -4,11 +4,12 @@ import styled from "styled-components/macro";
 // import { useEffect } from "react";
 
 // import { useGlobalContext } from "../contexts/GlobalContext";
-import NotFound from "./NotFound/NotFound";
-import Homepage from "./Homepage/Homepage";
 import useRoutes from "../hooks/useRoutes";
+import NotFound from "./NotFound";
 import Header from "../common/Header";
+import Homepage from "./Homepage";
 import Menu from "../common/Menu";
+import Foods from "./Foods";
 
 const PrivateRouteWrapper = () => {
   // const { user } = useGlobalContext();
@@ -34,6 +35,10 @@ const PrivateRouteWrapper = () => {
             <Homepage />
           </Route>
 
+          <Route exact path={routes.foods.url}>
+            <Foods />
+          </Route>
+
           <Route>
             <NotFound />
           </Route>
@@ -54,5 +59,8 @@ const PageWrap = styled.div`
 `;
 
 const InnerPageWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   padding: ${({ theme }) => theme.spacing(2)}px;
 `;

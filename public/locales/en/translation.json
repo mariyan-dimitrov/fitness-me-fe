@@ -2,7 +2,8 @@
   "PAGE_NAMES": {
     "HOMEPAGE": "Homepage",
     "LOGIN": "Login",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "FOODS": "Foods"
   },
 
   "MAIN_MENU": {

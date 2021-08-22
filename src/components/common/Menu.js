@@ -1,7 +1,10 @@
+import { Home as HomeIcon, Fastfood as FastFoodIcon } from "@material-ui/icons";
 import { useEffect, useState, useRef } from "react";
-import { Home as HomeIcon } from "@material-ui/icons";
 import styled from "styled-components/macro";
 import cn from "classnames";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import usePageNameFromUrl from "../hooks/usePageNameFromUrl";
@@ -13,6 +16,10 @@ const menuItems = [
   {
     pageName: "homepage",
     Icon: HomeIcon,
+  },
+  {
+    pageName: "foods",
+    Icon: FastFoodIcon,
   },
 ];
 
@@ -37,17 +44,19 @@ const Menu = () => {
       })}
     >
       {menuItems.map(({ pageName, Icon }) => (
-        <MenuItem
+        <StyledListItem
+          button
           onClick={() => pushRoute(routes[pageName].url)}
           className={cn({ "is-active": routes[pageName].name === currentPageName })}
           key={pageName}
         >
-          <IconWrap className="icon-wrap">
-            <Icon />
-          </IconWrap>
-
-          <h3>{routes[pageName].name}</h3>
-        </MenuItem>
+          <ListItemIcon>
+            <IconWrap className="icon-wrap">
+              <Icon />
+            </IconWrap>
+          </ListItemIcon>
+          <ListItemText primary={routes[pageName].name} />
+        </StyledListItem>
       ))}
     </Wrap>
   );
@@ -58,6 +67,7 @@ export default Menu;
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   box-shadow: ${({ theme }) => theme.shadows[8]};
   overflow: hidden;
   height: 100%;
@@ -98,7 +108,7 @@ const Wrap = styled.div`
   }
 `;
 
-const MenuItem = styled.div`
+const StyledListItem = styled(ListItem)`
   display: flex;
   align-items: center;
   padding: ${({ theme }) => theme.spacing(1)}px ${({ theme }) => theme.spacing(2.5)}px

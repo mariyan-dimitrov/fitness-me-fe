@@ -3,25 +3,32 @@ import styled from "styled-components/macro";
 import { Form } from "react-final-form";
 import { Link } from "react-router-dom";
 
-import useValidateInput from "../../hooks/useValidateInput";
-import TextField from "../../forms/final-form-fields/TextField";
-import Checkbox from "../../forms/final-form-fields/Checkbox";
-import useTranslate from "../../hooks/useTranslate";
-import useRoutes from "../../hooks/useRoutes";
-import accout from "../../api/account";
+import useValidateInput from "../hooks/useValidateInput";
+import TextField from "../forms/final-form-fields/TextField";
+import useTranslate from "../hooks/useTranslate";
+import useRoutes from "../hooks/useRoutes";
+import account from "../api/account";
 
-const Login = () => {
+const Register = () => {
   const { validateInput } = useValidateInput();
   const { routes } = useRoutes();
   const i18n = useTranslate();
 
-  const onSubmit = values => accout.login(values).then(console.log).catch(console.error);
+  const onSubmit = values => account.register(values).then(console.log).catch(console.error);
 
   const validate = formState => {
-    const { email, password } = formState;
+    const { userName, email, password, confirmPassword } = formState;
     const errors = {};
 
     validateInput([
+      {
+        name: "userName",
+        value: userName,
+        rules: {
+          isRequired: true,
+        },
+        errors,
+      },
       {
         name: "email",
         value: email,
@@ -40,8 +47,18 @@ const Login = () => {
         },
         errors,
       },
+      {
+        name: "confirmPassword",
+        value: confirmPassword,
+        rules: {
+          isRequired: true,
+          isEqualTo: password,
+        },
+        errors,
+      },
     ]);
 
+    console.log(errors);
     return errors;
   };
 
@@ -58,6 +75,10 @@ const Login = () => {
               </Row>
 
               <Row>
+                <TextField name="userName" label={i18n("FIELD_LABELS.USERNAME")} />
+              </Row>
+
+              <Row>
                 <TextField name="email" label={i18n("FIELD_LABELS.EMAIL")} />
               </Row>
 
@@ -66,7 +87,11 @@ const Login = () => {
               </Row>
 
               <Row>
-                <Checkbox name="rememberMe" label={i18n("FIELD_LABELS.REMEMBER_ME")} />
+                <TextField
+                  name="confirmPassword"
+                  label={i18n("FIELD_LABELS.CONFIRM_PASSWORD")}
+                  type="password"
+                />
               </Row>
 
               <Row className="is-aligned-right">
@@ -76,8 +101,8 @@ const Login = () => {
               </Row>
 
               <Row className="is-aligned-center">
-                {i18n("LOGIN.DONT_HAVE_AN_ACC", {
-                  registerUrl: <Link to={routes.register.url}>{i18n("LOGIN.REGISTER")}</Link>,
+                {i18n("REGISTER.HAVE_AN_ACC", {
+                  loginUrl: <Link to={routes.login.url}>{i18n("REGISTER.LOGIN")}</Link>,
                 })}
               </Row>
             </form>
@@ -88,7 +113,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
 
 const Wrap = styled.div`
   display: flex;
