@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const hostURL = "http://localhost:5000/api";
+import hostURL from "../../_constants/serverApiUrl";
 
 export const login = payload => {
   return axios({
