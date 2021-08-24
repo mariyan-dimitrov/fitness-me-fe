@@ -12,6 +12,7 @@ import Menu from "../common/Menu";
 import Weight from "./Weight";
 import Foods from "./Foods";
 import Meal from "./Meal";
+import { Paper } from "@material-ui/core";
 
 const PrivateRouteWrapper = () => {
   // const { user } = useGlobalContext();
@@ -27,40 +28,42 @@ const PrivateRouteWrapper = () => {
   // }
 
   return (
-    <PageWrap>
+    <Wrap>
       <Header />
       <Menu />
 
       <InnerPageWrap>
-        <Switch>
-          <Route exact path={routes.homepage.url}>
-            <Homepage />
-          </Route>
+        <PageWrap>
+          <Switch>
+            <Route exact path={routes.homepage.url}>
+              <Homepage />
+            </Route>
 
-          <Route exact path={routes.foods.url}>
-            <Foods />
-          </Route>
+            <Route exact path={routes.foods.url}>
+              <Foods />
+            </Route>
 
-          <Route exact path={routes.meal.url}>
-            <Meal />
-          </Route>
+            <Route exact path={routes.meal.url}>
+              <Meal />
+            </Route>
 
-          <Route exact path={routes.weight.url}>
-            <Weight />
-          </Route>
+            <Route exact path={routes.weight.url}>
+              <Weight />
+            </Route>
 
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </PageWrap>
       </InnerPageWrap>
-    </PageWrap>
+    </Wrap>
   );
 };
 
 export default PrivateRouteWrapper;
 
-const PageWrap = styled.div`
+const Wrap = styled.div`
   display: flex;
   padding-top: 64px;
   width: 100vw;
@@ -73,4 +76,12 @@ const InnerPageWrap = styled.div`
   flex-direction: column;
   width: 100%;
   padding: ${({ theme }) => theme.spacing(2)}px;
+  overflow: hidden;
+`;
+
+const PageWrap = styled(Paper)`
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing(2)}px;
+  flex-grow: 1;
+  overflow: auto;
 `;

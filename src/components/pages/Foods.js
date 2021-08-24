@@ -1,5 +1,3 @@
-import styled from "styled-components/macro";
-import { Paper } from "@material-ui/core";
 import { useEffect, useState } from "react";
 
 import { getFood, deleteFood } from "../api/food";
@@ -22,7 +20,7 @@ const Foods = () => {
   }, [foods]);
 
   return (
-    <StyledPaper>
+    <>
       <Table
         isLoading={!foods}
         data={foods || []}
@@ -40,14 +38,8 @@ const Foods = () => {
         handleEdit={handleEdit}
         handleRemove={handleRemove}
       />
-    </StyledPaper>
+    </>
   );
 };
 
 export default Foods;
-
-const StyledPaper = styled(Paper)`
-  flex-grow: 1;
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing(2)}px;
-`;

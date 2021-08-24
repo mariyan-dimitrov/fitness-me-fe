@@ -12,6 +12,8 @@
     "classnames": "^2.3.1",
     "date-fns": "^2.23.0",
     "final-form": "^4.20.2",
+    "highcharts": "^9.2.2",
+    "highcharts-react-official": "^3.0.0",
     "i18next": "^20.4.0",
     "i18next-xhr-backend": "^3.2.2",
     "js-cookie": "^3.0.0",

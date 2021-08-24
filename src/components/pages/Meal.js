@@ -4,11 +4,13 @@ import { Form } from "react-final-form";
 import styled from "styled-components";
 import { format } from "date-fns";
 
+import DateTimePicker from "../forms/final-form-fields/DateTimePicker";
+import TextField from "../forms/final-form-fields/TextField";
 import useValidateInput from "../hooks/useValidateInput";
-import TextField from "../forms/fields/TextField";
 import useTranslate from "../hooks/useTranslate";
 import { getMeal } from "../api/meal";
 import Table from "../common/Table";
+import Row from "../common/Row";
 
 const Meal = () => {
   const [mealRecords, setMealRecords] = useState(false);
@@ -21,25 +23,23 @@ const Meal = () => {
   const onSubmit = values => console.log(values);
 
   const validate = formState => {
-    const { email, password } = formState;
+    const { food, day } = formState;
     const errors = {};
 
     validateInput([
       {
-        name: "email",
-        value: email,
+        name: "food",
+        value: food,
         rules: {
           isRequired: true,
-          isEmail: true,
         },
         errors,
       },
       {
-        name: "password",
-        value: password,
+        name: "day",
+        value: day,
         rules: {
           isRequired: true,
-          minLength: 6,
         },
         errors,
       },
@@ -72,7 +72,7 @@ const Meal = () => {
   }, [mealRecords]);
 
   return (
-    <StyledPaper>
+    <>
       <Form
         onSubmit={onSubmit}
         validate={validate}
@@ -80,12 +80,12 @@ const Meal = () => {
           <StyledFormWrapper>
             <form onSubmit={handleSubmit}>
               <Row>
-                <TextField name="email" label={i18n("FIELD_LABELS.EMAIL")} />
+                <TextField name="food" label={i18n("FIELD_LABELS.FOOD")} />
               </Row>
 
-              {/* <Row>
-                <DateTimePicker name="email" label={i18n("FIELD_LABELS.EMAIL")} />
-              </Row> */}
+              <Row>
+                <DateTimePicker name="day" />
+              </Row>
 
               <Row className="is-aligned-right">
                 <Button variant="contained" color="primary" type="submit">
@@ -114,35 +114,13 @@ const Meal = () => {
           },
         ]}
       />
-    </StyledPaper>
+    </>
   );
 };
 
 export default Meal;
 
-const StyledPaper = styled(Paper)`
-  flex-grow: 1;
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing(2)}px;
-`;
-
 const StyledFormWrapper = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(2)}px;
   margin-bottom: ${({ theme }) => theme.spacing(2)}px;
-`;
-
-const Row = styled.div`
-  margin-bottom: ${({ theme }) => `${theme.spacing(3)}px`};
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-
-  &.is-aligned-right {
-    text-align: right;
-  }
-
-  &.is-aligned-center {
-    text-align: center;
-  }
 `;

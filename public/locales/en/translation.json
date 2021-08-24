@@ -26,7 +26,9 @@
     "PASSWORD": "Password",
     "CONFIRM_PASSWORD": "Confirm Password",
     "USERNAME": "User Name",
-    "REMEMBER_ME": "Remember me"
+    "REMEMBER_ME": "Remember me",
+    "FOOD": "Food",
+    "MASS": "Mass"
   },
   "FORM_VALIDATION_MESSAGES": {
     "FIELD_IS_REQUIRED": "Field is required",

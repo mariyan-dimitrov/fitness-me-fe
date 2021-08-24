@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import styled from "styled-components";
 
+import DateTimePicker from "../forms/final-form-fields/DateTimePicker";
 import useValidateInput from "../hooks/useValidateInput";
 import TextField from "../forms/fields/TextField";
 import useTranslate from "../hooks/useTranslate";
+import WeightChart from "../common/WeightChart";
 import { getWeight } from "../api/weight";
 import Table from "../common/Table";
+import Row from "../common/Row";
 
 const Weight = () => {
   const [weightRecords, setWeightRecords] = useState(false);
@@ -20,25 +23,23 @@ const Weight = () => {
   const onSubmit = values => console.log(values);
 
   const validate = formState => {
-    const { email, password } = formState;
+    const { mass, day } = formState;
     const errors = {};
 
     validateInput([
       {
-        name: "email",
-        value: email,
+        name: "mass",
+        value: mass,
         rules: {
           isRequired: true,
-          isEmail: true,
         },
         errors,
       },
       {
-        name: "password",
-        value: password,
+        name: "day",
+        value: day,
         rules: {
           isRequired: true,
-          minLength: 6,
         },
         errors,
       },
@@ -61,20 +62,24 @@ const Weight = () => {
             foodName: "Apple",
             grams: 400,
             calories: 500,
-            id: 1,
+            id: 2,
           },
           {
             foodName: "Brocolly",
             grams: 1000,
             calories: 200,
-            id: 1,
+            id: 3,
           },
         ]);
       });
   }, [weightRecords]);
 
   return (
-    <StyledPaper>
+    <>
+      <ChartWrap>
+        <WeightChart />
+      </ChartWrap>
+
       <Form
         onSubmit={onSubmit}
         validate={validate}
@@ -82,7 +87,11 @@ const Weight = () => {
           <StyledFormWrapper>
             <form onSubmit={handleSubmit}>
               <Row>
-                <TextField name="email" label={i18n("FIELD_LABELS.EMAIL")} />
+                <TextField name="mass" label={i18n("FIELD_LABELS.MASS")} />
+              </Row>
+
+              <Row>
+                <DateTimePicker name="day" />
               </Row>
 
               <Row className="is-aligned-right">
@@ -116,35 +125,18 @@ const Weight = () => {
           },
         ]}
       />
-    </StyledPaper>
+    </>
   );
 };
 
 export default Weight;
-
-const StyledPaper = styled(Paper)`
-  flex-grow: 1;
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing(2)}px;
-`;
 
 const StyledFormWrapper = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(2)}px;
   margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;
 
-const Row = styled.div`
-  margin-bottom: ${({ theme }) => `${theme.spacing(3)}px`};
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-
-  &.is-aligned-right {
-    text-align: right;
-  }
-
-  &.is-aligned-center {
-    text-align: center;
-  }
+const ChartWrap = styled(Paper)`
+  padding: ${({ theme }) => theme.spacing(2)}px;
+  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
 `;

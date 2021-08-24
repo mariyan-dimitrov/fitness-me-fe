@@ -11,22 +11,24 @@ import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import styled from "styled-components/macro";
+import hexToRgb from "../../utils/hexToRgb";
 
 const Table = ({
   component = Paper,
   data,
+  isLoading,
+  minheight = 400,
   structure,
   hasActions,
   handleEdit,
   handleRemove,
-  isLoading,
 }) => {
   const i18n = useTranslate();
 
   return (
     <StyledTableContainer component={component}>
-      <StyledTable>
-        <TableHead>
+      <StyledTable stickyHeader minheight={minheight}>
+        <StyledTableHead>
           <TableRow>
             {structure.map(({ header, className }) => (
               <TableCell className={className} key={header}>
@@ -40,10 +42,10 @@ const Table = ({
               </>
             )}
           </TableRow>
-        </TableHead>
+        </StyledTableHead>
         <TableBody>
           {data.map(item => (
-            <TableRow key={item.id}>
+            <StyledTableRow hover key={item.id}>
               {structure.map(({ accessor, header }) => (
                 <TableCell key={header} component="th" scope="row">
                   {typeof accessor === "string" ? item[accessor] : accessor(item)}
@@ -70,7 +72,7 @@ const Table = ({
                   </ActionCell>
                 </>
               )}
-            </TableRow>
+            </StyledTableRow>
           ))}
         </TableBody>
       </StyledTable>
@@ -91,6 +93,17 @@ const StyledTableContainer = styled(TableContainer)`
 
 const StyledTable = styled(MuiTable)`
   min-width: 650px;
+  min-height: ${({ minheight }) => minheight}px;
+`;
+
+const StyledTableHead = styled(TableHead)`
+  .MuiTableCell-stickyHeader {
+    background-color: ${({ theme }) => hexToRgb(theme.palette.primary.light, 0.3)};
+  }
+`;
+
+const StyledTableRow = styled(TableRow)`
+  height: 30px;
 `;
 
 const ActionWrap = styled(Button)`
