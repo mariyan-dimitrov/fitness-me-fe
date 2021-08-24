@@ -5,11 +5,13 @@ import styled from "styled-components/macro";
 
 // import { useGlobalContext } from "../contexts/GlobalContext";
 import useRoutes from "../hooks/useRoutes";
-import NotFound from "./NotFound";
 import Header from "../common/Header";
+import NotFound from "./NotFound";
 import Homepage from "./Homepage";
 import Menu from "../common/Menu";
+import Weight from "./Weight";
 import Foods from "./Foods";
+import Meal from "./Meal";
 
 const PrivateRouteWrapper = () => {
   // const { user } = useGlobalContext();
@@ -37,6 +39,14 @@ const PrivateRouteWrapper = () => {
 
           <Route exact path={routes.foods.url}>
             <Foods />
+          </Route>
+
+          <Route exact path={routes.meal.url}>
+            <Meal />
+          </Route>
+
+          <Route exact path={routes.weight.url}>
+            <Weight />
           </Route>
 
           <Route>

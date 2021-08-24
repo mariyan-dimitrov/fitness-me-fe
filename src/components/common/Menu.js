@@ -1,10 +1,12 @@
 import { Home as HomeIcon, Fastfood as FastFoodIcon } from "@material-ui/icons";
-import { useEffect, useState, useRef } from "react";
-import styled from "styled-components/macro";
-import cn from "classnames";
-import ListItem from "@material-ui/core/ListItem";
+import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import KitchenIcon from "@material-ui/icons/Kitchen";
+import { useEffect, useState, useRef } from "react";
+import ListItem from "@material-ui/core/ListItem";
+import styled from "styled-components/macro";
+import cn from "classnames";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import usePageNameFromUrl from "../hooks/usePageNameFromUrl";
@@ -19,7 +21,15 @@ const menuItems = [
   },
   {
     pageName: "foods",
+    Icon: KitchenIcon,
+  },
+  {
+    pageName: "meal",
     Icon: FastFoodIcon,
+  },
+  {
+    pageName: "weight",
+    Icon: AccessibilityIcon,
   },
 ];
 

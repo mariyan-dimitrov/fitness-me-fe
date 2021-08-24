@@ -32,11 +32,11 @@ export const getFood = foodId => {
   });
 };
 
-const accout = {
+const food = {
   addFood,
   changeFood,
   deleteFood,
   getFood,
 };
 
-export default accout;
+export default food;

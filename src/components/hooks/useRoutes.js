@@ -28,6 +28,16 @@ const useRoutes = () => {
       name: i18n("PAGE_NAMES.FOODS"),
       singularName: i18n("PAGE_NAMES.FOODS"),
     },
+    meal: {
+      url: "/meal",
+      name: i18n("PAGE_NAMES.MEAL"),
+      singularName: i18n("PAGE_NAMES.MEAL"),
+    },
+    weight: {
+      url: "/weight",
+      name: i18n("PAGE_NAMES.WEIGHT"),
+      singularName: i18n("PAGE_NAMES.WEIGHT"),
+    },
   };
 
   const stringifiedRoutes = JSON.stringify(routes);

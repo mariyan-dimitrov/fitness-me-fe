@@ -3,9 +3,10 @@
     "HOMEPAGE": "Homepage",
     "LOGIN": "Login",
     "REGISTER": "Register",
-    "FOODS": "Foods"
+    "FOODS": "Foods",
+    "MEAL": "Meal",
+    "WEIGHT": "Weight"
   },
-
   "MAIN_MENU": {
     "TOGGLE_THEME": "Toggle theme",
     "LOGOUT": "Logout"
@@ -20,7 +21,6 @@
     "REGISTER": "Register",
     "WELCOME": "Welcome to Fitness Me"
   },
-
   "FIELD_LABELS": {
     "EMAIL": "Email",
     "PASSWORD": "Password",
@@ -48,5 +48,9 @@
   },
   "GENERAL_ACTIONS": {
     "SUBMIT": "Submit"
+  },
+  "TABLE_HEADERS": {
+    "EDIT": "Edit",
+    "DELETE": "Delete"
   }
 }
