@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components/macro";
 import {
+  Settings as SettingsIcon,
   WbSunny as LightIcon,
-  Person as PersonIcon,
   ExitToApp as LogoutIcon,
   Brightness2 as DarkIcon,
   ColorLens as ColorLensIcon,
@@ -21,21 +21,21 @@ import {
 } from "@material-ui/core";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
-import { useCookieContext } from "../contexts/CookieContext";
 import { useThemeContext } from "../contexts/ThemeContext";
 import useChangeLanguage from "../hooks/useChangeLanguage";
 import useTranslate from "../hooks/useTranslate";
-import Radio from "../forms/fields/Radio";
+import useLogout from "../hooks/useLogout";
 import Switch from "../forms/fields/Switch";
+import Radio from "../forms/fields/Radio";
 
 const AvatarPopover = () => {
-  const { removeCookie } = useCookieContext();
   const { user, lang } = useGlobalContext();
   const { theme, themeColor, muiTheme, availableColors, toggleTheme, setThemeColor } =
     useThemeContext();
   const [showUserPopover, setShowUserPopover] = useState(false);
-  const avatarRef = useRef();
   const i18n = useTranslate();
+  const logout = useLogout();
+  const avatarRef = useRef();
   const togglePopover = () => setShowUserPopover(prev => !prev);
   const changeLanguage = useChangeLanguage();
 
@@ -46,8 +46,9 @@ const AvatarPopover = () => {
           <Tooltip title={`Permission Role: ${user.role}`} placement="left" arrow>
             <UserName>{user.email}</UserName>
           </Tooltip>
+
           <StyledAvatar onClick={() => setShowUserPopover(true)} ref={avatarRef}>
-            {user.email.slice(0, 2).toUpperCase()}
+            <SettingsIcon />
           </StyledAvatar>
         </AvatarWrap>
       )}
@@ -110,7 +111,7 @@ const AvatarPopover = () => {
 
               <Divider />
 
-              <ListItem button onClick={() => removeCookie("token")}>
+              <ListItem button onClick={() => logout()}>
                 <ListItemIcon>
                   <LogoutIcon color="primary" />
                 </ListItemIcon>

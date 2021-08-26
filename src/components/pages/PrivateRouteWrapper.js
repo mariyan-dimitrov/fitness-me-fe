@@ -1,9 +1,10 @@
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components/macro";
-// import { useHistory } from "react-router";
-// import { useEffect } from "react";
+import { Paper } from "@material-ui/core";
+import { useHistory } from "react-router";
+import { useEffect } from "react";
 
-// import { useGlobalContext } from "../contexts/GlobalContext";
+import { useGlobalContext } from "../contexts/GlobalContext";
 import useRoutes from "../hooks/useRoutes";
 import Header from "../common/Header";
 import NotFound from "./NotFound";
@@ -12,20 +13,19 @@ import Menu from "../common/Menu";
 import Weight from "./Weight";
 import Foods from "./Foods";
 import Meal from "./Meal";
-import { Paper } from "@material-ui/core";
 
 const PrivateRouteWrapper = () => {
-  // const { user } = useGlobalContext();
+  const { user } = useGlobalContext();
   const { routes } = useRoutes();
-  // const history = useHistory();
+  const history = useHistory();
 
-  // useEffect(() => {
-  //   !user && history.replace(routes.login.url);
-  // }, [history, user, routes]);
+  useEffect(() => {
+    !user && history.replace(routes.login.url);
+  }, [history, user, routes]);
 
-  // if (!user) {
-  //   return null;
-  // }
+  if (!user) {
+    return null;
+  }
 
   return (
     <Wrap>

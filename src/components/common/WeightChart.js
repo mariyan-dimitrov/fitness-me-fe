@@ -3,12 +3,19 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import styled, { useTheme } from "styled-components/macro";
 
-const WeightChart = () => {
+const WeightChart = ({ weightRecords }) => {
   const theme = useTheme();
+
+  const chartData =
+    weightRecords && weightRecords.map(({ mass, day }) => [new Date(day).getTime(), mass]);
+
+  if (!weightRecords) {
+    return null;
+  }
 
   const options = {
     title: {
-      text: "My chart",
+      text: "Weight History",
       style: {
         color: theme.palette.text.primary,
       },
@@ -45,8 +52,12 @@ const WeightChart = () => {
     },
     xAxis: [
       {
+        type: "datetime",
+        dateTimeLabelFormats: {
+          day: "%d %b %Y",
+        },
         title: {
-          text: "Temperature (°C)",
+          text: "Date",
           style: {
             color: theme.palette.text.primary,
           },
@@ -72,7 +83,7 @@ const WeightChart = () => {
     yAxis: [
       {
         title: {
-          text: "Temperature (°C)",
+          text: "Weight",
           style: {
             color: theme.palette.text.primary,
           },
@@ -94,7 +105,7 @@ const WeightChart = () => {
     ],
     series: [
       {
-        data: [1, 2, 3],
+        data: chartData,
       },
     ],
   };

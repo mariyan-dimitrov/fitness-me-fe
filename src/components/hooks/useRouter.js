@@ -30,6 +30,25 @@ const useRouter = () => {
     [history, pathname]
   );
 
+  const replaceRoute = useCallback(
+    (route, params = {}) => {
+      if (route.includes("?")) {
+        params = getObjFromSearchQuery(route.split("?").pop());
+        route = route.split("?").shift();
+      }
+
+      if (route && route !== pathname) {
+        isRedirecting = route;
+
+        history.replace({
+          pathname: route,
+          search: getSearchQueryFromObject(params),
+        });
+      }
+    },
+    [history, pathname]
+  );
+
   const updateQuery = useCallback(
     (params = {}) => {
       const queryObj = { ...getObjFromSearchQuery(search) };
@@ -63,7 +82,7 @@ const useRouter = () => {
     }
   }, [pathname]);
 
-  return { updateQuery, pushRoute, location, history, pathname };
+  return { updateQuery, replaceRoute, pushRoute, location, history, pathname };
 };
 
 export default useRouter;

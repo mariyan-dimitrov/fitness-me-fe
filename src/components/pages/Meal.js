@@ -2,13 +2,13 @@ import { Button, Paper } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import styled from "styled-components";
-import { format } from "date-fns";
 
 import DateTimePicker from "../forms/final-form-fields/DateTimePicker";
 import TextField from "../forms/final-form-fields/TextField";
 import useValidateInput from "../hooks/useValidateInput";
+import assetTypes from "../../_constants/assetTypes";
 import useTranslate from "../hooks/useTranslate";
-import { getMeal } from "../api/meal";
+import useApi from "../hooks/useApi";
 import Table from "../common/Table";
 import Row from "../common/Row";
 
@@ -16,11 +16,13 @@ const Meal = () => {
   const [mealRecords, setMealRecords] = useState(false);
   const { validateInput } = useValidateInput();
   const i18n = useTranslate();
+  const { create, getAll } = useApi();
 
   const handleEdit = () => {};
   const handleRemove = () => {};
 
-  const onSubmit = values => console.log(values);
+  const onSubmit = values =>
+    create(assetTypes.meal.name, values).then(console.log).catch(console.log);
 
   const validate = formState => {
     const { food, day } = formState;
@@ -49,27 +51,8 @@ const Meal = () => {
   };
 
   useEffect(() => {
-    !mealRecords &&
-      getMeal(2).finally(() => {
-        setMealRecords([
-          {
-            mass: 100,
-            day: format(new Date("2021-05-03 06:35:00"), "dd/MM/yyyy"),
-            id: 1,
-          },
-          {
-            mass: 110,
-            day: format(new Date("2021-06-03 06:35:00"), "dd/MM/yyyy"),
-            id: 2,
-          },
-          {
-            mass: 150,
-            day: format(new Date("2021-07-03 06:35:00"), "dd/MM/yyyy"),
-            id: 3,
-          },
-        ]);
-      });
-  }, [mealRecords]);
+    !mealRecords && getAll(assetTypes.meal.name).then(({ data }) => setMealRecords(data));
+  }, [getAll, mealRecords]);
 
   return (
     <>

@@ -1,2 +1,5 @@
-1. Add the change theme functionality
-2. Add the change language dropdown.
+1. Remember me functionality
+2. Detect when the user token is expired
+3. Constant date format
+4. Toaster messages.
+5. Make papers in evey page more distinguishable.

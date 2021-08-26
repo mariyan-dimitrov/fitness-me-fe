@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 
-import { getFood, deleteFood } from "../api/food";
+import assetTypes from "../../_constants/assetTypes";
+import useApi from "../hooks/useApi";
 import Table from "../common/Table";
 
 const Foods = () => {
   const [foods, setFoods] = useState(false);
+  const { getAll, remove } = useApi();
 
   const handleEdit = () => {};
 
   const handleRemove = item => {
-    deleteFood(item.id)
-      .then(() => {})
-      .catch(() => {});
+    remove(assetTypes.food.name, item.id).then(console.log).catch(console.log);
   };
 
   useEffect(() => {
-    // TODO: Change to adequate get all request
-    !foods && getFood(3).then(({ data }) => setFoods([data.food]));
-  }, [foods]);
+    !foods && getAll(assetTypes.food.name).then(({ data }) => setFoods(data));
+  }, [foods, getAll]);
 
   return (
     <>

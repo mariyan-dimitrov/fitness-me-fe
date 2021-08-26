@@ -1,26 +1,30 @@
+import { useCallback, useEffect, useState } from "react";
 import { Button, Paper } from "@material-ui/core";
-import { useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import styled from "styled-components";
+import { format } from "date-fns";
 
 import DateTimePicker from "../forms/final-form-fields/DateTimePicker";
+import TextField from "../forms/final-form-fields/TextField";
 import useValidateInput from "../hooks/useValidateInput";
-import TextField from "../forms/fields/TextField";
+import assetTypes from "../../_constants/assetTypes";
+import dateFormat from "../../_constants/dateFormat";
 import useTranslate from "../hooks/useTranslate";
 import WeightChart from "../common/WeightChart";
-import { getWeight } from "../api/weight";
+import useApi from "../hooks/useApi";
 import Table from "../common/Table";
 import Row from "../common/Row";
 
 const Weight = () => {
   const [weightRecords, setWeightRecords] = useState(false);
   const { validateInput } = useValidateInput();
+  const { create, getAll } = useApi();
   const i18n = useTranslate();
 
   const handleEdit = () => {};
   const handleRemove = () => {};
 
-  const onSubmit = values => console.log(values);
+  const onSubmit = values => create(assetTypes.weight.name, values).then(fetchChartData);
 
   const validate = formState => {
     const { mass, day } = formState;
@@ -48,36 +52,19 @@ const Weight = () => {
     return errors;
   };
 
+  const fetchChartData = useCallback(
+    () => getAll(assetTypes.weight.name).then(({ data }) => setWeightRecords(data)),
+    [getAll]
+  );
+
   useEffect(() => {
-    !weightRecords &&
-      getWeight(2).finally(() => {
-        setWeightRecords([
-          {
-            foodName: "Banana",
-            grams: 200,
-            calories: 300,
-            id: 1,
-          },
-          {
-            foodName: "Apple",
-            grams: 400,
-            calories: 500,
-            id: 2,
-          },
-          {
-            foodName: "Brocolly",
-            grams: 1000,
-            calories: 200,
-            id: 3,
-          },
-        ]);
-      });
-  }, [weightRecords]);
+    !weightRecords && fetchChartData();
+  }, [getAll, fetchChartData, weightRecords]);
 
   return (
     <>
       <ChartWrap>
-        <WeightChart />
+        <WeightChart weightRecords={weightRecords} />
       </ChartWrap>
 
       <Form
@@ -112,16 +99,12 @@ const Weight = () => {
         handleRemove={handleRemove}
         structure={[
           {
-            header: "Food Name",
-            accessor: "foodName",
+            header: "Weight",
+            accessor: "mass",
           },
           {
-            header: "Portion in grams",
-            accessor: "grams",
-          },
-          {
-            header: "Calories",
-            accessor: "calories",
+            header: "Date",
+            accessor: ({ day }) => format(new Date(day), dateFormat),
           },
         ]}
       />

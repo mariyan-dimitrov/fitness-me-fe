@@ -85,26 +85,3 @@ const MenuButtonWrap = styled.div`
     }
   }
 `;
-
-const CreateButtonWrap = styled.div`
-  margin-left: ${({ theme }) => theme.spacing(3)}px;
-
-  .MuiButton-containedPrimary {
-    color: ${({ theme }) => theme.palette.primary.main};
-    background-color: #fff;
-
-    .MuiButton-label {
-      transition: ${({ theme }) => `color 250ms ${theme.transitions.easing.easeInOut}`};
-    }
-
-    &:hover {
-      color: ${({ theme }) => theme.palette.primary.contrastText};
-    }
-  }
-`;
-
-const Description = styled.div`
-  display: inline-block;
-  margin: ${({ theme }) => `0px 0px 0px ${theme.spacing(2)}px}`};
-  color: ${({ theme }) => theme.palette.primary.contrastText};
-`;

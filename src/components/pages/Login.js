@@ -3,20 +3,19 @@ import styled from "styled-components/macro";
 import { Form } from "react-final-form";
 import { Link } from "react-router-dom";
 
-import useValidateInput from "../hooks/useValidateInput";
 import TextField from "../forms/final-form-fields/TextField";
 import Checkbox from "../forms/final-form-fields/Checkbox";
+import useValidateInput from "../hooks/useValidateInput";
 import useTranslate from "../hooks/useTranslate";
 import useRoutes from "../hooks/useRoutes";
-import accout from "../api/account";
+import useLogin from "../hooks/useLogin";
 import Row from "../common/Row";
 
 const Login = () => {
   const { validateInput } = useValidateInput();
   const { routes } = useRoutes();
   const i18n = useTranslate();
-
-  const onSubmit = values => accout.login(values).then(console.log).catch(console.error);
+  const login = useLogin();
 
   const validate = formState => {
     const { email, password } = formState;
@@ -49,7 +48,7 @@ const Login = () => {
   return (
     <Wrap>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={login}
         validate={validate}
         render={({ handleSubmit }) => (
           <StyledPaper>

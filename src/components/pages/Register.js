@@ -3,33 +3,24 @@ import styled from "styled-components/macro";
 import { Form } from "react-final-form";
 import { Link } from "react-router-dom";
 
-import useValidateInput from "../hooks/useValidateInput";
 import TextField from "../forms/final-form-fields/TextField";
+import useValidateInput from "../hooks/useValidateInput";
 import useTranslate from "../hooks/useTranslate";
+import useRegister from "../hooks/useRegister";
 import useRoutes from "../hooks/useRoutes";
-import account from "../api/account";
 import Row from "../common/Row";
 
 const Register = () => {
   const { validateInput } = useValidateInput();
+  const register = useRegister();
   const { routes } = useRoutes();
   const i18n = useTranslate();
 
-  const onSubmit = values => account.register(values).then(console.log).catch(console.error);
-
   const validate = formState => {
-    const { userName, email, password, confirmPassword } = formState;
+    const { email, password, confirmPassword } = formState;
     const errors = {};
 
     validateInput([
-      {
-        name: "userName",
-        value: userName,
-        rules: {
-          isRequired: true,
-        },
-        errors,
-      },
       {
         name: "email",
         value: email,
@@ -59,24 +50,19 @@ const Register = () => {
       },
     ]);
 
-    console.log(errors);
     return errors;
   };
 
   return (
     <Wrap>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={register}
         validate={validate}
         render={({ handleSubmit }) => (
           <StyledPaper>
             <form onSubmit={handleSubmit}>
               <Row className="is-aligned-center">
                 <h2>{i18n("LOGIN.WELCOME")}</h2>
-              </Row>
-
-              <Row>
-                <TextField name="userName" label={i18n("FIELD_LABELS.USERNAME")} />
               </Row>
 
               <Row>
