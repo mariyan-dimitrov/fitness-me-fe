@@ -1,55 +1,45 @@
 import { useCallback, useEffect, useState } from "react";
-import { Button, Paper } from "@material-ui/core";
-import { Form } from "react-final-form";
+import { Paper } from "@material-ui/core";
 import styled from "styled-components";
 import { format } from "date-fns";
 
-import DateTimePicker from "../forms/final-form-fields/DateTimePicker";
-import TextField from "../forms/final-form-fields/TextField";
-import useValidateInput from "../hooks/useValidateInput";
 import assetTypes from "../../_constants/assetTypes";
 import dateFormat from "../../_constants/dateFormat";
-import useTranslate from "../hooks/useTranslate";
 import WeightChart from "../common/WeightChart";
+import WeightForm from "../forms/WeightForm";
 import useApi from "../hooks/useApi";
 import Table from "../common/Table";
-import Row from "../common/Row";
 
 const Weight = () => {
+  const [removeModeValues, setRemoveModeValues] = useState({});
   const [weightRecords, setWeightRecords] = useState(false);
-  const { validateInput } = useValidateInput();
-  const { create, getAll } = useApi();
-  const i18n = useTranslate();
+  const [editModeValues, setEditModeValues] = useState({});
+  const { getAll, create, change, remove } = useApi();
 
-  const handleEdit = () => {};
-  const handleRemove = () => {};
+  const editMode = Boolean(Object.keys(editModeValues).length);
+  const removeMode = Boolean(Object.keys(removeModeValues).length);
 
-  const onSubmit = values => create(assetTypes.weight.name, values).then(fetchChartData);
+  const handleStartRemove = item => setRemoveModeValues(item);
+  const handleStartEdit = item => setEditModeValues(item);
+  const cancelRemove = () => setRemoveModeValues({});
+  const cancelEdit = () => setEditModeValues({});
 
-  const validate = formState => {
-    const { mass, day } = formState;
-    const errors = {};
+  const onSubmit = values => {
+    if (editMode) {
+      const payload = { ...values };
 
-    validateInput([
-      {
-        name: "mass",
-        value: mass,
-        rules: {
-          isRequired: true,
-        },
-        errors,
-      },
-      {
-        name: "day",
-        value: day,
-        rules: {
-          isRequired: true,
-        },
-        errors,
-      },
-    ]);
-
-    return errors;
+      change(assetTypes.weight.name, values.id, payload).then(() => {
+        fetchChartData();
+        cancelEdit();
+      });
+    } else if (removeMode) {
+      remove(assetTypes.weight.name, values.id).then(() => {
+        fetchChartData();
+        cancelRemove();
+      });
+    } else {
+      create(assetTypes.weight.name, values).then(fetchChartData);
+    }
   };
 
   const fetchChartData = useCallback(
@@ -67,36 +57,22 @@ const Weight = () => {
         <WeightChart weightRecords={weightRecords} />
       </ChartWrap>
 
-      <Form
+      <WeightForm
         onSubmit={onSubmit}
-        validate={validate}
-        render={({ handleSubmit }) => (
-          <StyledFormWrapper>
-            <form onSubmit={handleSubmit}>
-              <Row>
-                <TextField name="mass" label={i18n("FIELD_LABELS.MASS")} />
-              </Row>
-
-              <Row>
-                <DateTimePicker name="day" />
-              </Row>
-
-              <Row className="is-aligned-right">
-                <Button variant="contained" color="primary" type="submit">
-                  {i18n("GENERAL_ACTIONS.SUBMIT")}
-                </Button>
-              </Row>
-            </form>
-          </StyledFormWrapper>
-        )}
+        cancelEdit={cancelEdit}
+        cancelRemove={cancelRemove}
+        editModeValues={editModeValues}
+        removeModeValues={removeModeValues}
       />
 
       <Table
         hasActions
         isLoading={!weightRecords}
         data={weightRecords || []}
-        handleEdit={handleEdit}
-        handleRemove={handleRemove}
+        handleEdit={handleStartEdit}
+        handleRemove={handleStartRemove}
+        editingRowId={editModeValues.id}
+        removingRowId={removeModeValues.id}
         structure={[
           {
             header: "Weight",
@@ -113,11 +89,6 @@ const Weight = () => {
 };
 
 export default Weight;
-
-const StyledFormWrapper = styled(Paper)`
-  padding: ${({ theme }) => theme.spacing(2)}px;
-  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
-`;
 
 const ChartWrap = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(2)}px;

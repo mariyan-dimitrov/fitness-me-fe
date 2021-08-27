@@ -1,8 +1,8 @@
-import styled from "styled-components/macro";
-import cn from "classnames";
-import { Field } from "react-final-form";
-import { Autocomplete } from "@material-ui/lab";
 import { TextField, FormControl } from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
+import styled from "styled-components/macro";
+import { Field } from "react-final-form";
+import cn from "classnames";
 
 import InputErrorMessage from "../../common/InputErrorMessage";
 
@@ -14,7 +14,7 @@ const AutoComplete = ({
   options,
   className,
   handleChange,
-  mainItemProp = "value",
+  mainItemProp = "id",
   ...rest
 }) => {
   const getSelectedItem = value => {

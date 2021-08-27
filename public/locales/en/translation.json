@@ -28,7 +28,12 @@
     "USERNAME": "User Name",
     "REMEMBER_ME": "Remember me",
     "FOOD": "Food",
-    "MASS": "Mass"
+    "MASS": "Mass",
+    "CARBS": "Carbs",
+    "PROTEIN": "Protein",
+    "NAME": "Name",
+    "FATS": "Fats",
+    "PORTION": "Portion"
   },
   "FORM_VALIDATION_MESSAGES": {
     "FIELD_IS_REQUIRED": "Field is required",
@@ -49,7 +54,12 @@
     "VALUES_DONT_MATCH": "Values don't match"
   },
   "GENERAL_ACTIONS": {
-    "SUBMIT": "Submit"
+    "ADD": "Add",
+    "EDIT": "Edit",
+    "SUBMIT": "Submit",
+    "CANCEL": "Cancel",
+    "REMOVE": "Remove",
+    "ARE_YOU_SURE_DELETE": "Are you sure you want to delete this entry?"
   },
   "TABLE_HEADERS": {
     "EDIT": "Edit",

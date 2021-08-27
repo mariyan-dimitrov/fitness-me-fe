@@ -21,7 +21,7 @@ const Select = ({ name, options, label, type, ...rest }) => {
               }}
             >
               {options.map(opt => (
-                <MenuItem value={opt.value} key={opt.value}>
+                <MenuItem value={opt.value} key={opt.id}>
                   {opt.name}
                 </MenuItem>
               ))}

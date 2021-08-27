@@ -1,3 +1,5 @@
+import cn from "classnames";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableBody from "@material-ui/core/TableBody";
@@ -21,6 +23,8 @@ const Table = ({
   structure,
   hasActions,
   handleEdit,
+  editingRowId,
+  removingRowId,
   handleRemove,
 }) => {
   const i18n = useTranslate();
@@ -45,7 +49,14 @@ const Table = ({
         </StyledTableHead>
         <TableBody>
           {data.map(item => (
-            <StyledTableRow hover key={item.id}>
+            <StyledTableRow
+              className={cn({
+                "is-editing": item.id === editingRowId,
+                "is-removing": item.id === removingRowId,
+              })}
+              hover
+              key={item.id}
+            >
               {structure.map(({ accessor, header }) => (
                 <TableCell key={header} component="th" scope="row">
                   {typeof accessor === "string" ? item[accessor] : accessor(item)}
@@ -76,6 +87,7 @@ const Table = ({
           ))}
         </TableBody>
       </StyledTable>
+
       {isLoading && (
         <LoadingWrap>
           <CircularProgress />
@@ -103,7 +115,43 @@ const StyledTableHead = styled(TableHead)`
 `;
 
 const StyledTableRow = styled(TableRow)`
+  position: relative;
   height: 30px;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &.is-editing {
+    &:after {
+      background-color: ${({ theme }) => hexToRgb(theme.palette.primary.light, 0.3)};
+      animation: pulse 0.5s alternate infinite;
+    }
+  }
+
+  &.is-removing {
+    &:after {
+      background-color: ${({ theme }) => hexToRgb(theme.palette.error.light, 0.3)};
+      animation: pulse 0.5s alternate infinite;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const ActionWrap = styled(Button)`
