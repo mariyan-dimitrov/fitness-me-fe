@@ -6,9 +6,10 @@ import useApi from "../hooks/useApi";
 import Table from "../common/Table";
 
 const Meal = () => {
-  const [mealRecords, setMealRecords] = useState(false);
   const [removeModeValues, setRemoveModeValues] = useState({});
   const [editModeValues, setEditModeValues] = useState({});
+  const [foodRecords, setFoodRecords] = useState(false);
+  const [mealRecords, setMealRecords] = useState(false);
   const { getAll, create, change, remove } = useApi();
 
   const editMode = Boolean(Object.keys(editModeValues).length);
@@ -24,8 +25,12 @@ const Meal = () => {
     [getAll]
   );
 
+  const getAllFoods = useCallback(
+    () => getAll(assetTypes.food.name).then(({ data }) => setFoodRecords(data)),
+    [getAll]
+  );
+
   const onSubmit = values => {
-    console.log("values: ", values);
     if (editMode) {
       const payload = { ...values };
       change(assetTypes.meal.name, values.id, payload).then(() => {
@@ -46,11 +51,16 @@ const Meal = () => {
     !mealRecords && getAllMeals();
   }, [getAllMeals, mealRecords]);
 
+  useEffect(() => {
+    !foodRecords && getAllFoods();
+  }, [getAllFoods, foodRecords]);
+
   return (
     <>
       <MealForm
         onSubmit={onSubmit}
         cancelEdit={cancelEdit}
+        foodRecords={foodRecords}
         cancelRemove={cancelRemove}
         editModeValues={editModeValues}
         removeModeValues={removeModeValues}
@@ -66,12 +76,12 @@ const Meal = () => {
         removingRowId={removeModeValues.id}
         structure={[
           {
-            header: "Mass",
-            accessor: "mass",
+            header: "Food Name",
+            accessor: ({ foodId }) => foodRecords.find(foodRecord => foodRecords.foodId === foodId),
           },
           {
-            header: "Day",
-            accessor: "day",
+            header: "Portion",
+            accessor: "Portion",
           },
         ]}
       />

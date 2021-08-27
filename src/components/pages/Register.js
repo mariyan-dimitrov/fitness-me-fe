@@ -89,7 +89,7 @@ const Register = () => {
 
               <Row className="is-aligned-center">
                 {i18n("REGISTER.HAVE_AN_ACC", {
-                  loginUrl: <Link to={routes.login.url}>{i18n("REGISTER.LOGIN")}</Link>,
+                  loginUrl: <StyledLink to={routes.login.url}>{i18n("REGISTER.LOGIN")}</StyledLink>,
                 })}
               </Row>
             </form>
@@ -119,4 +119,8 @@ const StyledPaper = styled(Paper)`
     display: flex;
     flex-direction: column;
   }
+`;
+
+const StyledLink = styled(Link)`
+  margin-left: ${({ theme }) => theme.spacing(1)}px;
 `;

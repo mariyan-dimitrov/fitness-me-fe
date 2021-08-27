@@ -110,7 +110,7 @@ const StyledTable = styled(MuiTable)`
 
 const StyledTableHead = styled(TableHead)`
   .MuiTableCell-stickyHeader {
-    background-color: ${({ theme }) => hexToRgb(theme.palette.primary.light, 0.3)};
+    background-color: ${({ theme }) => hexToRgb(theme.palette.primary.dark, 0.3)};
   }
 `;
 

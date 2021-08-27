@@ -17,7 +17,7 @@ const useLogin = () => {
     payload =>
       axios({
         method: "post",
-        url: `${hostURL}/register`,
+        url: `${hostURL}/login`,
         data: payload,
       })
         .then(({ data }) => {

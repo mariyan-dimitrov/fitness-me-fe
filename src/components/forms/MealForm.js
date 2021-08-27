@@ -1,4 +1,3 @@
-import { useState, useCallback, useEffect } from "react";
 import { Button, Paper } from "@material-ui/core";
 import { Form } from "react-final-form";
 import styled from "styled-components";
@@ -7,32 +6,23 @@ import cn from "classnames";
 import DateTimePicker from "./final-form-fields/DateTimePicker";
 import Autocomplete from "./final-form-fields/Autocomplete";
 import useValidateInput from "../hooks/useValidateInput";
-import assetTypes from "../../_constants/assetTypes";
 import TextField from "./final-form-fields/TextField";
 import useTranslate from "../hooks/useTranslate";
 import hexToRgb from "../../utils/hexToRgb";
-import useApi from "../hooks/useApi";
 import Row from "../common/Row";
 
 const MealForm = ({
   onSubmit,
   cancelEdit,
+  foodRecords,
   cancelRemove,
   editModeValues = {},
   removeModeValues = {},
 }) => {
   const { validateInput } = useValidateInput();
   const i18n = useTranslate();
-  const { getAll } = useApi();
-  const [foodRecords, setFoodRecords] = useState(false);
-
   const removeMode = Boolean(Object.keys(removeModeValues).length);
   const editMode = Boolean(Object.keys(editModeValues).length);
-
-  const getAllFoods = useCallback(
-    () => getAll(assetTypes.food.name).then(({ data }) => setFoodRecords(data)),
-    [getAll]
-  );
 
   const validate = formState => {
     const { foodId, portion, day } = formState;
@@ -70,10 +60,6 @@ const MealForm = ({
 
     return errors;
   };
-
-  useEffect(() => {
-    !foodRecords && getAllFoods();
-  }, [foodRecords, getAllFoods]);
 
   return (
     <Form

@@ -2,8 +2,9 @@ import styled from "styled-components/macro";
 import { Field } from "react-final-form";
 import cn from "classnames";
 
-import CustomTextField from "../fields/TextField";
 import { useThemeContext } from "../../contexts/ThemeContext";
+import CustomTextField from "../fields/TextField";
+import format from "date-fns/format";
 
 const DateTimePicker = ({ name, fullWidth, className, handleChange, ...rest }) => {
   const { theme } = useThemeContext();
@@ -11,12 +12,13 @@ const DateTimePicker = ({ name, fullWidth, className, handleChange, ...rest }) =
   return (
     <Field name={name}>
       {({ input, meta }) => {
-        const { onChange, ...restInput } = input;
+        const { onChange, value, ...restInput } = input;
 
         return (
           <StyledCustomTextField
             {...restInput}
             {...rest}
+            value={value || format(new Date(), "yyyy-MM-dd'T'hh:mm")}
             type="datetime-local"
             onChange={value => {
               onChange(value);

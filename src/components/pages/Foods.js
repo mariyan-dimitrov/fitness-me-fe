@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 
 import assetTypes from "../../_constants/assetTypes";
+import FoodStat from "../common/FoodStat";
 import FoodForm from "../forms/FoodForm";
 import useApi from "../hooks/useApi";
 import Table from "../common/Table";
@@ -79,6 +80,12 @@ const Foods = () => {
           {
             header: "Fats",
             accessor: "fats",
+          },
+          {
+            header: "Overview",
+            accessor: props => {
+              return <FoodStat {...props} />;
+            },
           },
         ]}
       />

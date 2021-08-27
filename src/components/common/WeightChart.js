@@ -1,13 +1,20 @@
+import styled, { useTheme } from "styled-components/macro";
+import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
-import HighchartsReact from "highcharts-react-official";
-import styled, { useTheme } from "styled-components/macro";
+const sortyByDate = (a, b) => {
+  const [aDate] = a;
+  const [bDate] = b;
+
+  return aDate - bDate;
+};
 
 const WeightChart = ({ weightRecords }) => {
   const theme = useTheme();
 
   const chartData =
-    weightRecords && weightRecords.map(({ mass, day }) => [new Date(day).getTime(), mass]);
+    weightRecords &&
+    weightRecords.map(({ mass, day }) => [new Date(day).getTime(), mass]).sort(sortyByDate);
 
   if (!weightRecords) {
     return null;

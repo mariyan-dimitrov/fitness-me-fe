@@ -8,6 +8,7 @@ import useValidateInput from "../hooks/useValidateInput";
 import useTranslate from "../hooks/useTranslate";
 import hexToRgb from "../../utils/hexToRgb";
 import Row from "../common/Row";
+import FoodStat from "../common/FoodStat";
 
 const FoodForm = ({
   onSubmit,
@@ -75,7 +76,7 @@ const FoodForm = ({
       onSubmit={onSubmit}
       validate={validate}
       initialValues={removeMode ? removeModeValues : editModeValues}
-      render={({ handleSubmit, form, errors }) => (
+      render={({ handleSubmit, form, errors, values }) => (
         <StyledFormWrapper className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}>
           <form
             onSubmit={event => {
@@ -112,6 +113,10 @@ const FoodForm = ({
                 label={i18n("FIELD_LABELS.FATS")}
                 disabled={removeMode}
               />
+            </Row>
+
+            <Row>
+              <FoodStat {...values} />
             </Row>
 
             <Row className="is-aligned-right">

@@ -9,7 +9,7 @@ const DatePicker = ({ dateFormat, onChange, clearable, value, ...rest }) => {
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <DatePickerMUI
         {...rest}
-        value={value || new Date()}
+        value={value || Date.now()}
         clearable={clearable}
         format={dateFormat}
         onChange={selectedDate => onChange(format(selectedDate, dateFormat))}
