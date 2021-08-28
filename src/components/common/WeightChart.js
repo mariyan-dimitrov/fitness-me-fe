@@ -24,7 +24,7 @@ const WeightChart = ({ weightRecords }) => {
 
   const options = {
     title: {
-      text: i18n("WEIGHT_PAGE.WEIGHT_HISTORY"),
+      text: i18n("WEIGHT_PAGE.WEIGHT_PROGRESS"),
       style: {
         color: theme.palette.text.primary,
       },

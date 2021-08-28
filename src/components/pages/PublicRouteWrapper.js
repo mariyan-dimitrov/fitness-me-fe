@@ -31,7 +31,7 @@ const PageWrap = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-image: url("https://d18zdz9g6n5za7.cloudfront.net/home/home-masthead-20201031-1340.jpg");
+  background-image: url("https://i.pinimg.com/originals/61/2b/13/612b13db13eeb7bcd42e24631aa9cd61.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 100% 0;

@@ -9,19 +9,32 @@
   },
   "WEIGHT_PAGE": {
     "WEIGHT_HISTORY": "Weight History",
+    "WEIGHT_PROGRESS": "Weight Progress",
     "WEIGHT": "Weight",
-    "DATE": "Date"
+    "DATE": "Date",
+    "HOW_MUCH_DO_YOU_WEIGHT": "How much do you weight?",
+    "EDIT_WEIGHT_RECORD": "Edit weight record",
+    "REMOVE_WEIGHT_RECORD": "Remove weight record"
   },
   "FOOD_PAGE": {
     "NAME": "Name",
-    "PROTEIN": "Protein",
-    "CARBS": "Carbs",
-    "FATS": "FATS",
-    "OVERVIEW": "Overview"
+    "PROTEIN": "Protein (g)",
+    "CARBS": "Carbs (g)",
+    "FATS": "Fats (g)",
+    "OVERVIEW": "Overview",
+    "WHAT_DID_YOU_EAT": "What did you eat?",
+    "ADD_NEW_FOOD_PRODUCT": "Add new food product",
+    "CONTAINS_PER_100": "Contains per 100g",
+    "EDIT_FOOD_PRODUCT": "Edit food product",
+    "REMOVE_FOOD_PRODUCT": "Remove food product"
   },
   "MEAL_PAGE": {
     "FOOD_NAME": "Food Name",
-    "PORTION": "Portion"
+    "PORTION": "Portion",
+    "PORTIONS": "Portions",
+    "TYPE_OF_FOOD": "Type of Food",
+    "EDIT_MEAL_RECORD": "Edit meal record",
+    "REMOVE_MEAL_RECORD": "Remove meal record"
   },
   "MAIN_MENU": {
     "TOGGLE_THEME": "Toggle theme",
@@ -43,7 +56,6 @@
     "CONFIRM_PASSWORD": "Confirm Password",
     "USERNAME": "User Name",
     "REMEMBER_ME": "Remember me",
-    "FOOD": "Food",
     "MASS": "Mass",
     "CARBS": "Carbs",
     "PROTEIN": "Protein",

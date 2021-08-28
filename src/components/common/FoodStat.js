@@ -5,15 +5,14 @@ import Tooltip from "./Tooltip";
 const FoodStat = ({ carbs = 0, protein = 0, fats = 0 }) => {
   const theme = useTheme();
   const entities = {
-    carbs,
     protein,
+    carbs,
     fats,
   };
-  console.log("entities: ", entities);
 
   const colors = {
-    carbs: theme.palette.primary.light,
     protein: theme.palette.secondary.light,
+    carbs: theme.palette.primary.light,
     fats: theme.palette.success.light,
   };
 

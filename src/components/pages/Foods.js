@@ -17,8 +17,15 @@ const Foods = () => {
   const editMode = Boolean(Object.keys(editModeValues).length);
   const removeMode = Boolean(Object.keys(removeModeValues).length);
 
-  const handleStartRemove = item => setRemoveModeValues(item);
-  const handleStartEdit = item => setEditModeValues(item);
+  const handleStartRemove = item => {
+    cancelEdit();
+    setRemoveModeValues(item);
+  };
+  const handleStartEdit = item => {
+    cancelRemove();
+    setEditModeValues(item);
+  };
+
   const cancelRemove = () => setRemoveModeValues({});
   const cancelEdit = () => setEditModeValues({});
 
@@ -58,6 +65,7 @@ const Foods = () => {
         editModeValues={editModeValues}
         removeModeValues={removeModeValues}
       />
+
       <Table
         hasActions
         isLoading={!foodRecords}

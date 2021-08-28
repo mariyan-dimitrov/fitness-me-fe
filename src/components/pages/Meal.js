@@ -17,8 +17,15 @@ const Meal = () => {
   const editMode = Boolean(Object.keys(editModeValues).length);
   const removeMode = Boolean(Object.keys(removeModeValues).length);
 
-  const handleStartRemove = item => setRemoveModeValues(item);
-  const handleStartEdit = item => setEditModeValues(item);
+  const handleStartRemove = item => {
+    cancelEdit();
+    setRemoveModeValues(item);
+  };
+  const handleStartEdit = item => {
+    cancelRemove();
+    setEditModeValues(item);
+  };
+
   const cancelRemove = () => setRemoveModeValues({});
   const cancelEdit = () => setEditModeValues({});
 
@@ -78,11 +85,11 @@ const Meal = () => {
         removingRowId={removeModeValues.id}
         structure={[
           {
-            header: i18n("MEAL_PAGE.FOOD_NAME"),
+            header: i18n("MEAL_PAGE.TYPE_OF_FOOD"),
             accessor: ({ foodId }) => foodRecords.find(foodRecord => foodRecords.foodId === foodId),
           },
           {
-            header: i18n("MEAL_PAGE.PORTION"),
+            header: i18n("MEAL_PAGE.PORTIONS"),
             accessor: "Portion",
           },
         ]}

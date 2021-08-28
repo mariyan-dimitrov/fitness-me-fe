@@ -70,69 +70,79 @@ const MealForm = ({
         ...(removeMode ? removeModeValues : editModeValues),
         day: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
       }}
-      render={({ handleSubmit, form, errors }) => (
-        <StyledFormWrapper
-          elevation={3}
-          className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}
-        >
-          <form
-            onSubmit={event => {
-              handleSubmit(event);
-              !Object.keys(errors).length && form.restart();
-            }}
+      render={({ handleSubmit, form, errors }) => {
+        const hasErrors = Boolean(Object.keys(errors).length);
+
+        return (
+          <StyledFormWrapper
+            elevation={3}
+            className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}
           >
-            <Row>
-              <StyledAutocomplete
-                name="foodId"
-                options={foodRecords || []}
-                label={i18n("FIELD_LABELS.FOOD")}
-                disabled={removeMode}
-              />
-            </Row>
+            <form
+              onSubmit={event => {
+                handleSubmit(event);
+                !hasErrors && form.restart();
+              }}
+            >
+              <Row className="is-aligned-center">
+                {!editMode && !removeMode && <h2>{i18n("FOOD_PAGE.WHAT_DID_YOU_EAT")}</h2>}
+                {editMode && <h2>{i18n("FOOD_PAGE.EDIT_MEAL_RECORD")}</h2>}
+                {removeMode && <h2>{i18n("FOOD_PAGE.REMOVE_MEAL_RECORD")}</h2>}
+              </Row>
 
-            <Row>
-              <TextField
-                name="portion"
-                type="number"
-                disabled={removeMode}
-                label={i18n("FIELD_LABELS.PORTION")}
-              />
-            </Row>
+              <Row>
+                <StyledAutocomplete
+                  name="foodId"
+                  options={foodRecords || []}
+                  label={i18n("MEAL_PAGE.TYPE_OF_FOOD")}
+                  disabled={removeMode}
+                />
+              </Row>
 
-            <Row>
-              <DateTimePicker name="day" disabled={removeMode} />
-            </Row>
+              <Row>
+                <TextField
+                  name="portion"
+                  type="number"
+                  disabled={removeMode}
+                  label={i18n("MEAL_PAGE.PORTIONS")}
+                />
+              </Row>
 
-            <Row className="is-aligned-right">
-              {removeMode && (
-                <RemoveQuestion>{i18n("GENERAL_ACTIONS.ARE_YOU_SURE_DELETE")}</RemoveQuestion>
-              )}
+              <Row>
+                <DateTimePicker name="day" disabled={removeMode} />
+              </Row>
 
-              {(editMode || removeMode) && (
-                <StyledButton
-                  variant="contained"
-                  onClick={e => {
-                    e.preventDefault();
-                    removeMode ? cancelRemove() : cancelEdit();
-                  }}
-                >
-                  {i18n("GENERAL_ACTIONS.CANCEL")}
-                </StyledButton>
-              )}
-
-              <Button variant="contained" color="primary" type="submit">
-                {i18n(
-                  editMode
-                    ? "GENERAL_ACTIONS.EDIT"
-                    : removeMode
-                    ? "GENERAL_ACTIONS.REMOVE"
-                    : "GENERAL_ACTIONS.ADD"
+              <Row className="is-aligned-right">
+                {removeMode && (
+                  <RemoveQuestion>{i18n("GENERAL_ACTIONS.ARE_YOU_SURE_DELETE")}</RemoveQuestion>
                 )}
-              </Button>
-            </Row>
-          </form>
-        </StyledFormWrapper>
-      )}
+
+                {(editMode || removeMode) && (
+                  <StyledButton
+                    variant="contained"
+                    onClick={e => {
+                      e.preventDefault();
+                      removeMode ? cancelRemove() : cancelEdit();
+                    }}
+                  >
+                    {i18n("GENERAL_ACTIONS.CANCEL")}
+                  </StyledButton>
+                )}
+
+                <Button variant="contained" color="primary" type="submit" disabled={hasErrors}>
+                  {i18n(
+                    editMode
+                      ? "GENERAL_ACTIONS.EDIT"
+                      : removeMode
+                      ? "GENERAL_ACTIONS.REMOVE"
+                      : "GENERAL_ACTIONS.ADD"
+                  )}
+                </Button>
+              </Row>
+            </form>
+          </StyledFormWrapper>
+        );
+      }}
     />
   );
 };
@@ -155,7 +165,7 @@ const StyledFormWrapper = styled(Paper)`
 const StyledButton = styled(Button)`
   margin-right: ${({ theme }) => theme.spacing(2)}px;
   background-color: ${({ theme }) => theme.palette.error.main};
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.primary.contrastText};
 
   &:hover {
     background-color: ${({ theme }) => theme.palette.error.dark};

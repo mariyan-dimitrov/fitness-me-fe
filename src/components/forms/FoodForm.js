@@ -25,6 +25,7 @@ const FoodForm = ({
 
   const validate = formState => {
     const { name, protein, carbs, fats } = formState;
+
     const errors = {};
 
     validateInput([
@@ -76,82 +77,96 @@ const FoodForm = ({
       onSubmit={onSubmit}
       validate={validate}
       initialValues={removeMode ? removeModeValues : editModeValues}
-      render={({ handleSubmit, form, errors, values }) => (
-        <StyledFormWrapper
-          elevation={3}
-          className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}
-        >
-          <form
-            onSubmit={event => {
-              handleSubmit(event);
-              !Object.keys(errors).length && form.restart();
-            }}
+      render={({ handleSubmit, form, errors, values }) => {
+        const hasErrors = Boolean(Object.keys(errors).length);
+
+        return (
+          <StyledFormWrapper
+            elevation={3}
+            className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}
           >
-            <Row>
-              <TextField name="name" label={i18n("FIELD_LABELS.NAME")} disabled={removeMode} />
-            </Row>
+            <form
+              onSubmit={event => {
+                handleSubmit(event);
+                !hasErrors && form.restart();
+              }}
+            >
+              <Row className="is-aligned-center">
+                {!editMode && !removeMode && <h2>{i18n("FOOD_PAGE.ADD_NEW_FOOD_PRODUCT")}</h2>}
+                {editMode && <h2>{i18n("FOOD_PAGE.EDIT_FOOD_PRODUCT")}</h2>}
+                {removeMode && <h2>{i18n("FOOD_PAGE.REMOVE_FOOD_PRODUCT")}</h2>}
+              </Row>
 
-            <Row>
-              <TextField
-                name="protein"
-                type="number"
-                label={i18n("FIELD_LABELS.PROTEIN")}
-                disabled={removeMode}
-              />
-            </Row>
+              <Row>
+                <TextField name="name" label={i18n("FOOD_PAGE.NAME")} disabled={removeMode} />
+              </Row>
 
-            <Row>
-              <TextField
-                name="carbs"
-                type="number"
-                label={i18n("FIELD_LABELS.CARBS")}
-                disabled={removeMode}
-              />
-            </Row>
+              <Row className="is-aligned-center">
+                <Divider text={i18n("FOOD_PAGE.CONTAINS_PER_100")} />
+              </Row>
 
-            <Row>
-              <TextField
-                name="fats"
-                type="number"
-                label={i18n("FIELD_LABELS.FATS")}
-                disabled={removeMode}
-              />
-            </Row>
+              <Row>
+                <TextField
+                  name="protein"
+                  type="number"
+                  label={i18n("FOOD_PAGE.PROTEIN")}
+                  disabled={removeMode}
+                />
+              </Row>
 
-            <Row>
-              <FoodStat {...values} />
-            </Row>
+              <Row>
+                <TextField
+                  name="carbs"
+                  type="number"
+                  label={i18n("FOOD_PAGE.CARBS")}
+                  disabled={removeMode}
+                />
+              </Row>
 
-            <Row className="is-aligned-right">
-              {removeMode && (
-                <RemoveQuestion>{i18n("GENERAL_ACTIONS.ARE_YOU_SURE_DELETE")}</RemoveQuestion>
-              )}
+              <Row>
+                <TextField
+                  name="fats"
+                  type="number"
+                  label={i18n("FOOD_PAGE.FATS")}
+                  disabled={removeMode}
+                />
+              </Row>
 
-              {(editMode || removeMode) && (
-                <StyledButton
-                  variant="contained"
-                  onClick={e => {
-                    e.preventDefault();
-                    removeMode ? cancelRemove() : cancelEdit();
-                  }}
-                >
-                  {i18n("GENERAL_ACTIONS.CANCEL")}
-                </StyledButton>
-              )}
+              <Row>
+                <FoodStat {...values} />
+              </Row>
 
-              <Button variant="contained" color="primary" type="submit">
-                {i18n(
-                  editMode
-                    ? "GENERAL_ACTIONS.EDIT"
-                    : removeMode
-                    ? "GENERAL_ACTIONS.REMOVE"
-                    : "GENERAL_ACTIONS.ADD"
+              <Row className="is-aligned-right">
+                {removeMode && (
+                  <RemoveQuestion>{i18n("GENERAL_ACTIONS.ARE_YOU_SURE_DELETE")}</RemoveQuestion>
                 )}
-              </Button>
-            </Row>
-          </form>
-        </StyledFormWrapper>
-      )}
+
+                {(editMode || removeMode) && (
+                  <StyledButton
+                    variant="contained"
+                    onClick={e => {
+                      e.preventDefault();
+                      removeMode ? cancelRemove() : cancelEdit();
+                    }}
+                  >
+                    {i18n("GENERAL_ACTIONS.CANCEL")}
+                  </StyledButton>
+                )}
+
+                <Button variant="contained" color="primary" type="submit" disabled={hasErrors}>
+                  {i18n(
+                    editMode
+                      ? "GENERAL_ACTIONS.EDIT"
+                      : removeMode
+                      ? "GENERAL_ACTIONS.REMOVE"
+                      : "GENERAL_ACTIONS.ADD"
+                  )}
+                </Button>
+              </Row>
+            </form>
+          </StyledFormWrapper>
+        );
+      }}
     />
   );
 };
@@ -174,7 +189,7 @@ const StyledFormWrapper = styled(Paper)`
 const StyledButton = styled(Button)`
   margin-right: ${({ theme }) => theme.spacing(2)}px;
   background-color: ${({ theme }) => theme.palette.error.main};
-  color: ${({ theme }) => theme.palette.text.primary};
+  color: ${({ theme }) => theme.palette.primary.contrastText};
 
   &:hover {
     background-color: ${({ theme }) => theme.palette.error.dark};
@@ -183,4 +198,22 @@ const StyledButton = styled(Button)`
 
 const RemoveQuestion = styled.div`
   margin-right: ${({ theme }) => theme.spacing(2)}px;
+`;
+
+const Divider = styled.div`
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background-color: ${({ theme }) => theme.palette.text.disabled};
+
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: "${({ text }) => text}";
+    display: block;
+    background-color: ${({ theme }) => theme.palette.background.paper};
+    padding: ${({ theme }) => theme.spacing(2)}px;
+  }
 `;

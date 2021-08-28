@@ -9,7 +9,6 @@ import useRouter from "../hooks/useRouter";
 import useRoutes from "../hooks/useRoutes";
 import Header from "../common/Header";
 import NotFound from "./NotFound";
-import Homepage from "./Homepage";
 import Menu from "../common/Menu";
 import Weight from "./Weight";
 import Foods from "./Foods";
@@ -42,10 +41,6 @@ const PrivateRouteWrapper = () => {
       <InnerPageWrap>
         <PageWrap>
           <Switch>
-            <Route exact path={routes.homepage.url}>
-              <Homepage />
-            </Route>
-
             <Route exact path={routes.foods.url}>
               <Foods />
             </Route>

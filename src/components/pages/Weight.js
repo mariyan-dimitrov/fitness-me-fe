@@ -21,8 +21,15 @@ const Weight = () => {
   const removeMode = Boolean(Object.keys(removeModeValues).length);
   const editMode = Boolean(Object.keys(editModeValues).length);
 
-  const handleStartRemove = item => setRemoveModeValues(item);
-  const handleStartEdit = item => setEditModeValues(item);
+  const handleStartRemove = item => {
+    cancelEdit();
+    setRemoveModeValues(item);
+  };
+  const handleStartEdit = item => {
+    cancelRemove();
+    setEditModeValues(item);
+  };
+
   const cancelRemove = () => setRemoveModeValues({});
   const cancelEdit = () => setEditModeValues({});
 
