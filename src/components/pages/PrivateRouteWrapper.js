@@ -1,7 +1,7 @@
 import { useHistory, useLocation } from "react-router";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components/macro";
-import { Paper } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import { useEffect } from "react";
 
 import { useGlobalContext } from "../contexts/GlobalContext";

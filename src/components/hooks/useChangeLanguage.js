@@ -1,5 +1,5 @@
-import i18next from "i18next";
 import { useCallback, useEffect } from "react";
+import i18next from "i18next";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 

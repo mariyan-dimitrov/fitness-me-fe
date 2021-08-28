@@ -7,6 +7,22 @@
     "MEAL": "Meal",
     "WEIGHT": "Weight"
   },
+  "WEIGHT_PAGE": {
+    "WEIGHT_HISTORY": "Weight History",
+    "WEIGHT": "Weight",
+    "DATE": "Date"
+  },
+  "FOOD_PAGE": {
+    "NAME": "Name",
+    "PROTEIN": "Protein",
+    "CARBS": "Carbs",
+    "FATS": "FATS",
+    "OVERVIEW": "Overview"
+  },
+  "MEAL_PAGE": {
+    "FOOD_NAME": "Food Name",
+    "PORTION": "Portion"
+  },
   "MAIN_MENU": {
     "TOGGLE_THEME": "Toggle theme",
     "LOGOUT": "Logout"
@@ -59,10 +75,25 @@
     "SUBMIT": "Submit",
     "CANCEL": "Cancel",
     "REMOVE": "Remove",
-    "ARE_YOU_SURE_DELETE": "Are you sure you want to delete this entry?"
+    "ARE_YOU_SURE_DELETE": "Are you sure you want to delete this entry?",
+    "OPEN_MENU": "Open Menu",
+    "CLOSE_MENU": "Close Menu"
   },
   "TABLE_HEADERS": {
     "EDIT": "Edit",
     "DELETE": "Delete"
+  },
+  "TOAST_MESSAGES": {
+    "SOMETHING_WENT_WRONG": "Something went wrong!",
+    "NOT_ALLOWED": "Not allowed!",
+    "WEIGHT_CREATED": "Weight entry successfully created!",
+    "FOOD_CREATED": "Food successfully created!",
+    "MEAL_CREATED": "Meal successfully created!",
+    "WEIGHT_CHANGED": "Weight entry successfully changed!",
+    "FOOD_CHANGED": "Food successfully changed!",
+    "MEAL_CHANGED": "Meal successfully changed!",
+    "WEIGHT_DELETED": "Weight entry successfully deleted!",
+    "FOOD_DELETED": "Food successfully deleted!",
+    "MEAL_DELETED": "Meal successfully deleted!"
   }
 }

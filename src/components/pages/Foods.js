@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 
 import assetTypes from "../../_constants/assetTypes";
+import useTranslate from "../hooks/useTranslate";
 import FoodStat from "../common/FoodStat";
 import FoodForm from "../forms/FoodForm";
 import useApi from "../hooks/useApi";
@@ -8,8 +9,9 @@ import Table from "../common/Table";
 
 const Foods = () => {
   const [removeModeValues, setRemoveModeValues] = useState({});
-  const [foodRecords, setFoodRecords] = useState(false);
   const [editModeValues, setEditModeValues] = useState({});
+  const [foodRecords, setFoodRecords] = useState(false);
+  const i18n = useTranslate();
   const { getAll, create, change, remove } = useApi();
 
   const editMode = Boolean(Object.keys(editModeValues).length);
@@ -66,23 +68,23 @@ const Foods = () => {
         removingRowId={removeModeValues.id}
         structure={[
           {
-            header: "Name",
+            header: i18n("FOOD_PAGE.NAME"),
             accessor: "name",
           },
           {
-            header: "Protein",
+            header: i18n("FOOD_PAGE.PROTEIN"),
             accessor: "protein",
           },
           {
-            header: "Carbs",
+            header: i18n("FOOD_PAGE.CARBS"),
             accessor: "carbs",
           },
           {
-            header: "Fats",
+            header: i18n("FOOD_PAGE.FATS"),
             accessor: "fats",
           },
           {
-            header: "Overview",
+            header: i18n("FOOD_PAGE.OVERVIEW"),
             accessor: props => {
               return <FoodStat {...props} />;
             },

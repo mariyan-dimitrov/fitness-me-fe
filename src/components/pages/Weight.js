@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { Paper } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import styled from "styled-components";
-import { format } from "date-fns";
+import format from "date-fns/format";
 
 import assetTypes from "../../_constants/assetTypes";
 import dateFormat from "../../_constants/dateFormat";
+import useTranslate from "../hooks/useTranslate";
 import WeightChart from "../common/WeightChart";
 import WeightForm from "../forms/WeightForm";
 import useApi from "../hooks/useApi";
@@ -15,9 +16,10 @@ const Weight = () => {
   const [weightRecords, setWeightRecords] = useState(false);
   const [editModeValues, setEditModeValues] = useState({});
   const { getAll, create, change, remove } = useApi();
+  const i18n = useTranslate();
 
-  const editMode = Boolean(Object.keys(editModeValues).length);
   const removeMode = Boolean(Object.keys(removeModeValues).length);
+  const editMode = Boolean(Object.keys(editModeValues).length);
 
   const handleStartRemove = item => setRemoveModeValues(item);
   const handleStartEdit = item => setEditModeValues(item);
@@ -53,7 +55,7 @@ const Weight = () => {
 
   return (
     <>
-      <ChartWrap>
+      <ChartWrap elevation={3}>
         <WeightChart weightRecords={weightRecords} />
       </ChartWrap>
 
@@ -75,11 +77,11 @@ const Weight = () => {
         removingRowId={removeModeValues.id}
         structure={[
           {
-            header: "Weight",
+            header: i18n("WEIGHT_PAGE.WEIGHT"),
             accessor: "mass",
           },
           {
-            header: "Date",
+            header: i18n("WEIGHT_PAGE.DATE"),
             accessor: ({ day }) => format(new Date(day), dateFormat),
           },
         ]}

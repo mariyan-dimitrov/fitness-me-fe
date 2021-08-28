@@ -1,4 +1,5 @@
 import styled, { useTheme } from "styled-components/macro";
+
 import Tooltip from "./Tooltip";
 
 const FoodStat = ({ carbs = 0, protein = 0, fats = 0 }) => {

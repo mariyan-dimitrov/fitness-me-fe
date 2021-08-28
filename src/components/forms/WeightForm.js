@@ -59,7 +59,10 @@ const WeightForm = ({
         day: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
       }}
       render={({ handleSubmit, form, errors }) => (
-        <StyledFormWrapper className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}>
+        <StyledFormWrapper
+          elevation={3}
+          className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}
+        >
           <form
             onSubmit={event => {
               handleSubmit(event);

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import assetTypes from "../../_constants/assetTypes";
+import useTranslate from "../hooks/useTranslate";
 import MealForm from "../forms/MealForm";
 import useApi from "../hooks/useApi";
 import Table from "../common/Table";
@@ -11,6 +12,7 @@ const Meal = () => {
   const [foodRecords, setFoodRecords] = useState(false);
   const [mealRecords, setMealRecords] = useState(false);
   const { getAll, create, change, remove } = useApi();
+  const i18n = useTranslate();
 
   const editMode = Boolean(Object.keys(editModeValues).length);
   const removeMode = Boolean(Object.keys(removeModeValues).length);
@@ -76,11 +78,11 @@ const Meal = () => {
         removingRowId={removeModeValues.id}
         structure={[
           {
-            header: "Food Name",
+            header: i18n("MEAL_PAGE.FOOD_NAME"),
             accessor: ({ foodId }) => foodRecords.find(foodRecord => foodRecords.foodId === foodId),
           },
           {
-            header: "Portion",
+            header: i18n("MEAL_PAGE.PORTION"),
             accessor: "Portion",
           },
         ]}

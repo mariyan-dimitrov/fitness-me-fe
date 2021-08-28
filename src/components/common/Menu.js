@@ -10,9 +10,9 @@ import cn from "classnames";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import usePageNameFromUrl from "../hooks/usePageNameFromUrl";
+import hexToRgb from "../../utils/hexToRgb";
 import useRoutes from "../hooks/useRoutes";
 import useRouter from "../hooks/useRouter";
-import hexToRgb from "../../utils/hexToRgb";
 
 const menuItems = [
   {

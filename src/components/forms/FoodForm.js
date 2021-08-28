@@ -3,12 +3,12 @@ import { Form } from "react-final-form";
 import styled from "styled-components";
 import cn from "classnames";
 
-import TextField from "./final-form-fields/TextField";
 import useValidateInput from "../hooks/useValidateInput";
+import TextField from "./final-form-fields/TextField";
 import useTranslate from "../hooks/useTranslate";
 import hexToRgb from "../../utils/hexToRgb";
-import Row from "../common/Row";
 import FoodStat from "../common/FoodStat";
+import Row from "../common/Row";
 
 const FoodForm = ({
   onSubmit,
@@ -77,7 +77,10 @@ const FoodForm = ({
       validate={validate}
       initialValues={removeMode ? removeModeValues : editModeValues}
       render={({ handleSubmit, form, errors, values }) => (
-        <StyledFormWrapper className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}>
+        <StyledFormWrapper
+          elevation={3}
+          className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}
+        >
           <form
             onSubmit={event => {
               handleSubmit(event);

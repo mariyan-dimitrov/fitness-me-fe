@@ -1,6 +1,7 @@
 import styled, { useTheme } from "styled-components/macro";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
+import useTranslate from "../hooks/useTranslate";
 
 const sortyByDate = (a, b) => {
   const [aDate] = a;
@@ -10,6 +11,7 @@ const sortyByDate = (a, b) => {
 };
 
 const WeightChart = ({ weightRecords }) => {
+  const i18n = useTranslate();
   const theme = useTheme();
 
   const chartData =
@@ -22,7 +24,7 @@ const WeightChart = ({ weightRecords }) => {
 
   const options = {
     title: {
-      text: "Weight History",
+      text: i18n("WEIGHT_PAGE.WEIGHT_HISTORY"),
       style: {
         color: theme.palette.text.primary,
       },
@@ -64,7 +66,7 @@ const WeightChart = ({ weightRecords }) => {
           day: "%d %b %Y",
         },
         title: {
-          text: "Date",
+          text: i18n("WEIGHT_PAGE.DATE"),
           style: {
             color: theme.palette.text.primary,
           },
@@ -90,7 +92,7 @@ const WeightChart = ({ weightRecords }) => {
     yAxis: [
       {
         title: {
-          text: "Weight",
+          text: i18n("WEIGHT_PAGE.WEIGHT"),
           style: {
             color: theme.palette.text.primary,
           },

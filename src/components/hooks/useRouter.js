@@ -1,5 +1,5 @@
-import { useCallback, useEffect } from "react";
 import { useLocation, useHistory } from "react-router";
+import { useCallback, useEffect } from "react";
 
 import getSearchQueryFromObject from "../../utils/getSearchQueryFromObject";
 import getObjFromSearchQuery from "../../utils/getObjFromSearchQuery";

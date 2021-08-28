@@ -5,6 +5,7 @@ import cn from "classnames";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import usePageNameFromUrl from "../hooks/usePageNameFromUrl";
+import useTranslate from "../hooks/useTranslate";
 import AvatarPopover from "./AvatarPopover";
 import useRouter from "../hooks/useRouter";
 import useRoutes from "../hooks/useRoutes";
@@ -13,6 +14,7 @@ const Header = () => {
   const { isMenuOpened, updateGlobalState } = useGlobalContext();
   const { location } = useRouter();
   const { routes } = useRoutes();
+  const i18n = useTranslate();
   const { pathname } = location;
 
   const routeData = routes[pathname.replace("/", "")];
@@ -23,7 +25,7 @@ const Header = () => {
       <CustomToolbar>
         <MenuButtonWrap>
           <IconButton
-            title={isMenuOpened ? "Close menu" : "Open menu"}
+            title={i18n(isMenuOpened ? "GENERAL_ACTIONS.CLOSE_MENU" : "GENERAL_ACTIONS.OPEN_MENU")}
             color="inherit"
             aria-label="open drawer"
             onClick={() => updateGlobalState({ isMenuOpened: !isMenuOpened })}

@@ -1,5 +1,6 @@
-import { Button, Paper } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import styled from "styled-components/macro";
+import Paper from "@material-ui/core/Paper";
 import { Form } from "react-final-form";
 import { Link } from "react-router-dom";
 

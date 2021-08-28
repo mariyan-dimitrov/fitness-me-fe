@@ -1,23 +1,24 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components/macro";
 import {
+  ColorLens as ColorLensIcon,
   Settings as SettingsIcon,
-  WbSunny as LightIcon,
   ExitToApp as LogoutIcon,
   Brightness2 as DarkIcon,
-  ColorLens as ColorLensIcon,
+  WbSunny as LightIcon,
 } from "@material-ui/icons";
+
 import {
-  Avatar,
-  Popover,
-  Grid,
-  List,
-  ListItem,
   ListItemText,
   ListItemIcon,
-  Tooltip,
-  Divider,
   RadioGroup,
+  ListItem,
+  Popover,
+  Divider,
+  Tooltip,
+  Avatar,
+  List,
+  Grid,
 } from "@material-ui/core";
 
 import { useGlobalContext } from "../contexts/GlobalContext";

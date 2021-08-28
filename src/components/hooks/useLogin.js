@@ -1,12 +1,13 @@
+import { toast } from "react-toastify";
 import { useCallback } from "react";
 import axios from "axios";
 
 import { useCookieContext } from "../contexts/CookieContext";
 import { useGlobalContext } from "../contexts/GlobalContext";
+import session_storage from "../../utils/session_storage";
 import hostURL from "../../_constants/serverApiUrl";
 import useRouter from "./useRouter";
 import useRoutes from "./useRoutes";
-import session_storage from "../../utils/session_storage";
 
 const useLogin = () => {
   const { updateGlobalState } = useGlobalContext();
@@ -33,6 +34,7 @@ const useLogin = () => {
             },
           });
           pushRoute(routes.homepage.url);
+          toast.success(`Welcome!`);
         })
         .catch(console.error),
     [pushRoute, routes.homepage.url, setCookie, updateGlobalState]
