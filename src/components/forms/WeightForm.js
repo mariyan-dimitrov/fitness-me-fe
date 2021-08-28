@@ -1,6 +1,7 @@
 import { Button, Paper } from "@material-ui/core";
 import { Form } from "react-final-form";
 import styled from "styled-components";
+import format from "date-fns/format";
 import cn from "classnames";
 
 import DateTimePicker from "./final-form-fields/DateTimePicker";
@@ -53,7 +54,10 @@ const WeightForm = ({
     <Form
       onSubmit={onSubmit}
       validate={validate}
-      initialValues={removeMode ? removeModeValues : editModeValues}
+      initialValues={{
+        ...(removeMode ? removeModeValues : editModeValues),
+        day: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
+      }}
       render={({ handleSubmit, form, errors }) => (
         <StyledFormWrapper className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}>
           <form

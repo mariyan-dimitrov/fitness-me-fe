@@ -1,4 +1,4 @@
-import { Home as HomeIcon, Fastfood as FastFoodIcon } from "@material-ui/icons";
+import { Fastfood as FastFoodIcon } from "@material-ui/icons";
 import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -16,20 +16,16 @@ import hexToRgb from "../../utils/hexToRgb";
 
 const menuItems = [
   {
-    pageName: "homepage",
-    Icon: HomeIcon,
-  },
-  {
-    pageName: "foods",
-    Icon: KitchenIcon,
+    pageName: "weight",
+    Icon: AccessibilityIcon,
   },
   {
     pageName: "meal",
     Icon: FastFoodIcon,
   },
   {
-    pageName: "weight",
-    Icon: AccessibilityIcon,
+    pageName: "foods",
+    Icon: KitchenIcon,
   },
 ];
 

@@ -4,7 +4,6 @@ import cn from "classnames";
 
 import { useThemeContext } from "../../contexts/ThemeContext";
 import CustomTextField from "../fields/TextField";
-import format from "date-fns/format";
 
 const DateTimePicker = ({ name, fullWidth, className, handleChange, ...rest }) => {
   const { theme } = useThemeContext();
@@ -18,7 +17,7 @@ const DateTimePicker = ({ name, fullWidth, className, handleChange, ...rest }) =
           <StyledCustomTextField
             {...restInput}
             {...rest}
-            value={value || format(new Date(), "yyyy-MM-dd'T'hh:mm")}
+            value={value}
             type="datetime-local"
             onChange={value => {
               onChange(value);

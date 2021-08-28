@@ -1,10 +1,11 @@
+import { useHistory, useLocation } from "react-router";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components/macro";
 import { Paper } from "@material-ui/core";
-import { useHistory } from "react-router";
 import { useEffect } from "react";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
+import useRouter from "../hooks/useRouter";
 import useRoutes from "../hooks/useRoutes";
 import Header from "../common/Header";
 import NotFound from "./NotFound";
@@ -16,12 +17,18 @@ import Meal from "./Meal";
 
 const PrivateRouteWrapper = () => {
   const { user } = useGlobalContext();
+  const { pathname } = useLocation();
+  const { pushRoute } = useRouter();
   const { routes } = useRoutes();
   const history = useHistory();
 
   useEffect(() => {
     !user && history.replace(routes.login.url);
   }, [history, user, routes]);
+
+  useEffect(() => {
+    user && pathname === "/" && pushRoute(routes.weight.url);
+  }, [pathname, pushRoute, routes.weight.url, user]);
 
   if (!user) {
     return null;
