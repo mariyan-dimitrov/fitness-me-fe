@@ -6,6 +6,7 @@ import { useGlobalContext } from "../contexts/GlobalContext";
 import hostURL from "../../_constants/serverApiUrl";
 import useRouter from "./useRouter";
 import useRoutes from "./useRoutes";
+import session_storage from "../../utils/session_storage";
 
 const useLogin = () => {
   const { updateGlobalState } = useGlobalContext();
@@ -21,15 +22,16 @@ const useLogin = () => {
         data: payload,
       })
         .then(({ data }) => {
-          const { email } = payload;
+          const { email, rememberMe } = payload;
+
+          rememberMe && setCookie("userToken", data);
+          !rememberMe && session_storage.set("userToken", data);
 
           updateGlobalState({
             user: {
               email,
             },
           });
-
-          setCookie("userToken", data);
           pushRoute(routes.homepage.url);
         })
         .catch(console.error),

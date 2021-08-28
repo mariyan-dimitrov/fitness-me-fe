@@ -4,6 +4,7 @@ import axios from "axios";
 import { useCookieContext } from "../contexts/CookieContext";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import hostURL from "../../_constants/serverApiUrl";
+import session_storage from "../../utils/session_storage";
 
 const useLogout = () => {
   const { updateGlobalState } = useGlobalContext();
@@ -13,6 +14,7 @@ const useLogout = () => {
     callback => {
       updateGlobalState({ user: false });
       removeCookie("userToken");
+      session_storage.remove("userToken");
 
       axios({
         method: "post",

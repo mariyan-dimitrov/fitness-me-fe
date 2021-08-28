@@ -3,15 +3,17 @@ import axios from "axios";
 
 import { useCookieContext } from "../contexts/CookieContext";
 import hostURL from "../../_constants/serverApiUrl";
+import session_storage from "../../utils/session_storage";
 
 const useApi = () => {
   const { cookies } = useCookieContext();
+  const token = session_storage.get("userToken") || cookies.userToken;
 
   const headers = useMemo(
     () => ({
-      Authorization: `Bearer ${cookies.userToken}`,
+      Authorization: `Bearer ${token}`,
     }),
-    [cookies.userToken]
+    [token]
   );
 
   const getAll = useCallback(
