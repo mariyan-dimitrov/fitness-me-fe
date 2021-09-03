@@ -1,47 +1,124 @@
 {
   "PAGE_NAMES": {
-    "HOMEPAGE": "Homepage",
-    "LOGIN": "Логин",
-    "REGISTER": "Регистрация"
+    "HOMEPAGE": "Начална страница",
+    "LOGIN": "Влезте",
+    "REGISTER": "Регистрирай се",
+    "FOODS": "Храни",
+    "MEAL": "Ястия",
+    "WEIGHT": "Тело",
+    "WORKOUT": "Тренировка"
   },
-
+  "WEIGHT_PAGE": {
+    "WEIGHT_HISTORY": "История на тегло",
+    "WEIGHT_PROGRESS": "Прогрес на тегло",
+    "WEIGHT_KG": "Тегло (кг)",
+    "DATE": "Дата",
+    "HOW_MUCH_DO_YOU_WEIGHT": "Колко тежите?",
+    "EDIT_WEIGHT_RECORD": "Редактирай тренивовъчен запис",
+    "REMOVE_WEIGHT_RECORD": "Изтрий тренивовъчен запис"
+  },
+  "FOOD_PAGE": {
+    "NAME": "Име",
+    "PROTEIN": "Протеин (г)",
+    "CARBS": "Въхлегидрати (г)",
+    "FATS": "Мазнини (г)",
+    "OVERVIEW": "Разглеждане",
+    "WHAT_DID_YOU_EAT": "Какво сте хапвали?",
+    "ADD_NEW_FOOD_PRODUCT": "Добави ново хранене",
+    "CONTAINS_PER_100": "Съдържа в 100г",
+    "EDIT_FOOD_PRODUCT": "Редактирай храна",
+    "REMOVE_FOOD_PRODUCT": "Изтрии храна"
+  },
+  "WORKOUT_PAGE": {
+    "WORKOUT_PROGRESS": "Прогрес на тренировки",
+    "DISTANCE_KM": "Разстояние (км)",
+    "DATE": "Дата",
+    "RUNNING": "Тичане",
+    "HOW_MUCH_DID_YOU_WORKOUT": "Колко сте спортували?"
+  },
+  "MEAL_PAGE": {
+    "FOOD_NAME": "Име на ястие",
+    "PORTION": "Порция",
+    "PORTIONS": "Порции",
+    "TYPE_OF_FOOD": "Тип храна",
+    "EDIT_MEAL_RECORD": "Редактирай ястие",
+    "REMOVE_MEAL_RECORD": "Изтрии ястие"
+  },
   "MAIN_MENU": {
-    "TOGGLE_THEME": "Смени тема"
+    "TOGGLE_THEME": "Смени тема",
+    "LOGOUT": "Излез"
   },
   "REGISTER": {
-    "HAVE_AN_ACC": "Имаш акаунт? {{loginUrl}}",
-    "LOGIN": "Логин"
+    "HAVE_AN_ACC": "Имате акаунт? {{loginUrl}}",
+    "LOGIN": "Влезте",
+    "WELCOME": "Добре дошли във Fitness Me"
   },
   "LOGIN": {
-    "DONT_HAVE_AN_ACC": "Нямаш акаунт? {{registerUrl}}",
-    "REGISTER": "Регистрация"
+    "DONT_HAVE_AN_ACC": "Нямате акаут? {{registerUrl}}",
+    "REGISTER": "Регистрация",
+    "WELCOME": "Добре дошли във Fitness Me"
   },
-
   "FIELD_LABELS": {
     "EMAIL": "Имейл",
     "PASSWORD": "Парола",
-    "CONFIRM_PASSWORD": "Потвърди парола",
-    "USERNAME": "Потребителско име"
+    "CONFIRM_PASSWORD": "Потвърдете парола",
+    "USERNAME": "Потребителско име",
+    "REMEMBER_ME": "Запомни ме",
+    "MASS": "Телесна Маса (кг)",
+    "WEIGHT_KG": "Тегло (кг)",
+    "NAME": "Име",
+    "PROTEIN": "Протеин (г)",
+    "CARBS": "Въхлегидрати (г)",
+    "FATS": "Мазнини (г)",
+    "PORTION": "Порция",
+    "DISTANCE_KM": "Разстояние (км)",
+    "ACTIVITY": "Активност"
   },
   "FORM_VALIDATION_MESSAGES": {
-    "FIELD_IS_REQUIRED": "Field is required",
-    "MUST_CONTAIN_CHARACTERS": "Must contain atleast {{minLength}} characters",
-    "MUST_NOT_CONTAIN_MORE_THAN_CHARACTERS": "Must not contain more than {{maxLength}} characters",
-    "MUST_BE_HIGHER_THAN": "Must be higher than {{minValue}}",
-    "MUST_CONTAIN_ONLY_NUMBERS": "Must contain only numbers",
-    "INVALID_EMAIL": "Invalid email",
-    "MUST_NOT_CONTAIN_ANY_NUMBERS": "Must not contain any numbers",
-    "SHOULD_NOT_START_WITH_EMPTY_SPACE": "Should not start with empty space",
-    "SHOULD_NOT_CONTAIN_ANY_SPECIAL_CHARACTERS": "Should not contain any special characters",
-    "SHOULD_CONTAIN_A_NUMBER": "Should contain at least 1 number",
-    "SHOULD_CONTAIN_A_CAPITAL_LETTER": "Should contain a capital letter",
-    "TRAILING_SPACES_ARE_NOT_ALLOWED": "Trailing spaces are not allowed",
-    "INPUTS_DOESNT_MATCH": "Inputs doesn't match",
-    "SHOULD_NOT_END_WITH_TRAILING_SPACES": "Should not end with trailing spaces",
-    "SHOULD_BE_BETWEEN_VALUES": "Should be a value between {{min}} and {{max}}",
-    "VALUES_DONT_MATCH": "Values don't match"
+    "FIELD_IS_REQUIRED": "Полето е задължително",
+    "MUST_CONTAIN_CHARACTERS": "Трябва да съдържа поне {{minLength}} символа",
+    "MUST_NOT_CONTAIN_MORE_THAN_CHARACTERS": "Не трябва да съдъжа повече от {{maxLength}} символа",
+    "MUST_BE_HIGHER_THAN": "Трябва да е по-голямо от {{minValue}}",
+    "MUST_CONTAIN_ONLY_NUMBERS": "Трябва да съдържа само числа",
+    "INVALID_EMAIL": "Невалиден имейл",
+    "MUST_NOT_CONTAIN_ANY_NUMBERS": "Не трябва да съдържа числа",
+    "SHOULD_NOT_END_WITH_TRAILING_SPACES": "Не трябва да има празна надставка",
+    "VALUES_DONT_MATCH": "Стойностите не съвпадат"
   },
   "GENERAL_ACTIONS": {
-    "SUBMIT": "Submit"
+    "ADD": "Добави",
+    "EDIT": "Редактирай",
+    "SUBMIT": "Давай",
+    "CANCEL": "Отказ",
+    "REMOVE": "Изтрий",
+    "ARE_YOU_SURE_DELETE": "Сигурни ли сте, че искате да изтрийте този запис?",
+    "OPEN_MENU": "Отвори меню",
+    "CLOSE_MENU": "Затвори меню"
+  },
+  "TABLE_HEADERS": {
+    "EDIT": "Редактиране",
+    "DELETE": "Изтриване"
+  },
+  "TOAST_MESSAGES": {
+    "SOMETHING_WENT_WRONG": "Генерална грешка",
+    "NOT_ALLOWED": "Не е позволено",
+    "WEIGHT_CREATED": "Запис за тегло беше успешно създаден",
+    "WORKOUT_CREATED": "Запис за тренировка беше създаден създаден",
+    "FOOD_CREATED": "Запис за храна беше успешно създаден",
+    "MEAL_CREATED": "Запис за ястие беше успешно създаден",
+    "WEIGHT_CHANGED": "Запис за тегло беше успешно променен",
+    "WORKOUT_CHANGED": "Запис за тренировка беше създаден променен",
+    "FOOD_CHANGED": "Запис за храна беше успешно променен",
+    "MEAL_CHANGED": "Запис за ястие беше успешно променен",
+    "WEIGHT_DELETED": "Запис за тегло беше успешно изтрит!",
+    "WORKOUT_DELETED": "Запис за тренировка беше създаден изтрит!",
+    "FOOD_DELETED": "Запис за храна беше успешно изтрит!",
+    "MEAL_DELETED": "Запис за ястие беше успешно изтрит!",
+    "UNAUTHORIZED": "Неауторизиран",
+    "BAD_REQUEST": "Лоша заявка"
+  },
+  "LANGUAGES": {
+    "EN": "АНГ",
+    "BG": "БГ"
   }
 }

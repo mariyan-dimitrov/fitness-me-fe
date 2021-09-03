@@ -153,7 +153,4 @@ const IconWrap = styled.div`
   border-radius: 100px;
   color: ${({ theme }) => theme.palette.primary.light};
   box-shadow: ${({ theme }) => theme.shadows[5]};
-
-  /* TODO: Remove from here */
-  top: ${({ theme }) => console.log(theme)};
 `;
