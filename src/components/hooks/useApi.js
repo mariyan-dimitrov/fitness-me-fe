@@ -2,17 +2,16 @@ import { useCallback, useMemo } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+import getSearchQueryFromObject from "../../utils/getSearchQueryFromObject";
 import { useCookieContext } from "../contexts/CookieContext";
 import session_storage from "../../utils/session_storage";
+import useHandleHttpError from "./useHandleHttpError";
 import hostURL from "../../_constants/serverApiUrl";
 import useTranslate from "./useTranslate";
 
-const errorStatus = {
-  403: "TOAST_MESSAGES.NOT_ALLOWED",
-};
-
 const useApi = () => {
   const { cookies } = useCookieContext();
+  const handleHttpError = useHandleHttpError();
   const i18n = useTranslate();
   const token = session_storage.get("userToken") || cookies.userToken;
 
@@ -23,23 +22,19 @@ const useApi = () => {
     [token]
   );
 
-  const handleError = useCallback(
-    ({ response }) => {
-      toast.error(i18n(errorStatus[response.status]) || "TOAST_MESSAGES.SOMETHING_WENT_WRONG");
-    },
-    [i18n]
-  );
-
   const getAll = useCallback(
-    assetType =>
-      axios({
+    (assetType, pagination) => {
+      const query = pagination ? getSearchQueryFromObject(pagination) : "";
+
+      return axios({
         method: "GET",
-        url: `${hostURL}/${assetType}`,
+        url: `${hostURL}/${assetType}${query}`,
         headers: {
           ...headers,
         },
-      }).catch(handleError),
-    [handleError, headers]
+      }).catch(handleHttpError);
+    },
+    [handleHttpError, headers]
   );
 
   const create = useCallback(
@@ -56,8 +51,8 @@ const useApi = () => {
           toast.success(i18n(`TOAST_MESSAGES.${assetType.toUpperCase()}_CREATED`));
           return res;
         })
-        .catch(handleError),
-    [handleError, headers, i18n]
+        .catch(handleHttpError),
+    [handleHttpError, headers, i18n]
   );
 
   const remove = useCallback(
@@ -73,8 +68,8 @@ const useApi = () => {
           toast.success(i18n(`TOAST_MESSAGES.${assetType.toUpperCase()}_DELETED`));
           return res;
         })
-        .catch(handleError),
-    [handleError, headers, i18n]
+        .catch(handleHttpError),
+    [handleHttpError, headers, i18n]
   );
 
   const change = useCallback(
@@ -91,8 +86,8 @@ const useApi = () => {
           toast.success(i18n(`TOAST_MESSAGES.${assetType.toUpperCase()}_CHANGED`));
           return res;
         })
-        .catch(handleError),
-    [handleError, headers, i18n]
+        .catch(handleHttpError),
+    [handleHttpError, headers, i18n]
   );
 
   return { getAll, create, remove, change };

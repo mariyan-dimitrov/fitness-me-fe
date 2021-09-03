@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { useCookieContext } from "../contexts/CookieContext";
+import useHandleHttpError from "./useHandleHttpError";
 import hostURL from "../../_constants/serverApiUrl";
 import useRoutes from "./useRoutes";
 import useRouter from "./useRouter";
@@ -11,6 +12,7 @@ import useRouter from "./useRouter";
 const useRegister = () => {
   const { updateGlobalState } = useGlobalContext();
   const { setCookie } = useCookieContext();
+  const handleHttpError = useHandleHttpError();
   const { pushRoute } = useRouter();
   const { routes } = useRoutes();
 
@@ -34,8 +36,8 @@ const useRegister = () => {
           setCookie("userToken", data);
           pushRoute(routes.homepage.url);
         })
-        .catch(console.error),
-    [pushRoute, routes.homepage.url, setCookie, updateGlobalState]
+        .catch(handleHttpError),
+    [pushRoute, handleHttpError, routes.homepage.url, setCookie, updateGlobalState]
   );
 
   return register;

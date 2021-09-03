@@ -13,7 +13,7 @@ const FoodStat = ({ carbs = 0, protein = 0, fats = 0 }) => {
   const colors = {
     protein: theme.palette.secondary.light,
     carbs: theme.palette.primary.light,
-    fats: theme.palette.success.light,
+    fats: theme.palette.error.light,
   };
 
   const total = Object.values(entities).reduce((a, b) => Number(a) + Number(b));

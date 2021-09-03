@@ -48,7 +48,10 @@ const Foods = () => {
   };
 
   const fetchChartData = useCallback(
-    () => getAll(assetTypes.food.name).then(({ data }) => setFoodRecords(data)),
+    () =>
+      getAll(assetTypes.food.name).then(({ data }) => {
+        setFoodRecords(data);
+      }),
     [getAll]
   );
 

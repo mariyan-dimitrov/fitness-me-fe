@@ -102,7 +102,10 @@ const FoodForm = ({
               </Row>
 
               <Row className="is-aligned-center">
-                <Divider text={i18n("FOOD_PAGE.CONTAINS_PER_100")} />
+                <Divider
+                  className={cn({ "edit-mode": editMode, "remove-mode": removeMode })}
+                  text={i18n("FOOD_PAGE.CONTAINS_PER_100")}
+                />
               </Row>
 
               <Row>
@@ -206,7 +209,8 @@ const Divider = styled.div`
   height: 1px;
   background-color: ${({ theme }) => theme.palette.text.disabled};
 
-  &:after {
+  &:after,
+  &:before {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -214,6 +218,18 @@ const Divider = styled.div`
     content: "${({ text }) => text}";
     display: block;
     background-color: ${({ theme }) => theme.palette.background.paper};
-    padding: ${({ theme }) => theme.spacing(2)}px;
+    padding: ${({ theme }) => theme.spacing(1)}px;
+  }
+
+  &.edit-mode {
+    &:after {
+      background-color: ${({ theme }) => hexToRgb(theme.palette.primary.light, 0.3)};
+    }
+  }
+
+  &.remove-mode {
+    &:after {
+      background-color: ${({ theme }) => hexToRgb(theme.palette.error.light, 0.3)};
+    }
   }
 `;

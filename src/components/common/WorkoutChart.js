@@ -10,21 +10,21 @@ const sortyByDate = (a, b) => {
   return aDate - bDate;
 };
 
-const WeightChart = ({ weightRecords }) => {
+const WorkoutChart = ({ workoutRecords }) => {
   const i18n = useTranslate();
   const theme = useTheme();
 
   const chartData =
-    weightRecords &&
-    weightRecords.map(({ mass, day }) => [new Date(day).getTime(), mass]).sort(sortyByDate);
+    workoutRecords &&
+    workoutRecords.map(({ mass, day }) => [new Date(day).getTime(), mass]).sort(sortyByDate);
 
-  if (!weightRecords) {
+  if (!workoutRecords) {
     return null;
   }
 
   const options = {
     title: {
-      text: i18n("WEIGHT_PAGE.WEIGHT_PROGRESS"),
+      text: i18n("WORKOUT_PAGE.WORKOUT_PROGRESS"),
       style: {
         color: theme.palette.text.primary,
       },
@@ -66,7 +66,7 @@ const WeightChart = ({ weightRecords }) => {
           day: "%d %b %Y",
         },
         title: {
-          text: i18n("WEIGHT_PAGE.DATE"),
+          text: i18n("WORKOUT_PAGE.DATE"),
           style: {
             color: theme.palette.text.primary,
           },
@@ -92,7 +92,7 @@ const WeightChart = ({ weightRecords }) => {
     yAxis: [
       {
         title: {
-          text: i18n("WEIGHT_PAGE.WEIGHT_KG"),
+          text: i18n("WORKOUT_PAGE.DISTANCE_KM"),
           style: {
             color: theme.palette.text.primary,
           },
@@ -126,7 +126,7 @@ const WeightChart = ({ weightRecords }) => {
   );
 };
 
-export default WeightChart;
+export default WorkoutChart;
 
 const Wrap = styled.div`
   .highcharts-credits {

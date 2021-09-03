@@ -2,8 +2,11 @@ import { Field } from "react-final-form";
 import { Select as MuiSelect, FormControl, MenuItem, InputLabel } from "@material-ui/core";
 
 import InputErrorMessage from "../../common/InputErrorMessage";
+import useTranslate from "../../hooks/useTranslate";
 
 const Select = ({ name, options, label, type, ...rest }) => {
+  const i18n = useTranslate();
+
   return (
     <Field name={name}>
       {({ input, meta }) => {
@@ -21,8 +24,8 @@ const Select = ({ name, options, label, type, ...rest }) => {
               }}
             >
               {options.map(opt => (
-                <MenuItem value={opt.value} key={opt.id}>
-                  {opt.name}
+                <MenuItem value={opt.value} key={opt.id || opt.value}>
+                  {i18n(opt.name)}
                 </MenuItem>
               ))}
             </MuiSelect>

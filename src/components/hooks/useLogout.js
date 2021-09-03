@@ -5,11 +5,13 @@ import axios from "axios";
 import { useCookieContext } from "../contexts/CookieContext";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import session_storage from "../../utils/session_storage";
+import useHandleHttpError from "./useHandleHttpError";
 import hostURL from "../../_constants/serverApiUrl";
 
 const useLogout = () => {
   const { updateGlobalState } = useGlobalContext();
   const { removeCookie } = useCookieContext();
+  const handleHttpError = useHandleHttpError();
 
   const logout = useCallback(
     callback => {
@@ -20,12 +22,14 @@ const useLogout = () => {
       axios({
         method: "post",
         url: `${hostURL}/logout`,
-      }).then(() => {
-        toast.success("Goodbye!");
-        callback && callback();
-      });
+      })
+        .then(() => {
+          toast.success("Goodbye!");
+          callback && callback();
+        })
+        .catch(handleHttpError);
     },
-    [removeCookie, updateGlobalState]
+    [removeCookie, handleHttpError, updateGlobalState]
   );
 
   return logout;

@@ -6,14 +6,14 @@ import format from "date-fns/format";
 import assetTypes from "../../_constants/assetTypes";
 import dateFormat from "../../_constants/dateFormat";
 import useTranslate from "../hooks/useTranslate";
-import WeightChart from "../common/WeightChart";
-import WeightForm from "../forms/WeightForm";
+import WorkoutChart from "../common/WorkoutChart";
+import WorkoutForm from "../forms/WorkoutForm";
 import useApi from "../hooks/useApi";
 import Table from "../common/Table";
 
-const Weight = () => {
+const Workout = () => {
   const [removeModeValues, setRemoveModeValues] = useState({});
-  const [weightRecords, setWeightRecords] = useState(false);
+  const [workoutRecords, setWorkoutRecords] = useState(false);
   const [editModeValues, setEditModeValues] = useState({});
   const { getAll, create, change, remove } = useApi();
   const i18n = useTranslate();
@@ -37,36 +37,36 @@ const Weight = () => {
     if (editMode) {
       const payload = { ...values };
 
-      change(assetTypes.weight.name, values.id, payload).then(() => {
+      change(assetTypes.workout.name, values.id, payload).then(() => {
         fetchChartData();
         cancelEdit();
       });
     } else if (removeMode) {
-      remove(assetTypes.weight.name, values.id).then(() => {
+      remove(assetTypes.workout.name, values.id).then(() => {
         fetchChartData();
         cancelRemove();
       });
     } else {
-      create(assetTypes.weight.name, values).then(fetchChartData);
+      create(assetTypes.workout.name, values).then(fetchChartData);
     }
   };
 
   const fetchChartData = useCallback(
-    () => getAll(assetTypes.weight.name).then(({ data }) => setWeightRecords(data)),
+    () => getAll(assetTypes.workout.name).then(({ data }) => setWorkoutRecords(data)),
     [getAll]
   );
 
   useEffect(() => {
-    !weightRecords && fetchChartData();
-  }, [getAll, fetchChartData, weightRecords]);
+    !workoutRecords && fetchChartData();
+  }, [getAll, fetchChartData, workoutRecords]);
 
   return (
     <>
       <ChartWrap elevation={3}>
-        <WeightChart weightRecords={weightRecords} />
+        <WorkoutChart workoutRecords={workoutRecords} />
       </ChartWrap>
 
-      <WeightForm
+      <WorkoutForm
         onSubmit={onSubmit}
         cancelEdit={cancelEdit}
         cancelRemove={cancelRemove}
@@ -76,20 +76,20 @@ const Weight = () => {
 
       <Table
         hasActions
-        isLoading={!weightRecords}
-        data={weightRecords || []}
+        isLoading={!workoutRecords}
+        data={workoutRecords || []}
         handleEdit={handleStartEdit}
         handleRemove={handleStartRemove}
         editingRowId={editModeValues.id}
         removingRowId={removeModeValues.id}
         structure={[
           {
-            header: i18n("WEIGHT_PAGE.WEIGHT_KG"),
-            accessor: "mass",
+            header: i18n("WORKOUT_PAGE.DISTANCE_KM"),
+            accessor: "distance",
           },
           {
-            header: i18n("WEIGHT_PAGE.DATE"),
-            accessor: ({ day }) => format(new Date(day), dateFormat),
+            header: i18n("WORKOUT_PAGE.DATE"),
+            accessor: ({ date }) => format(new Date(date), dateFormat),
           },
         ]}
       />
@@ -97,7 +97,7 @@ const Weight = () => {
   );
 };
 
-export default Weight;
+export default Workout;
 
 const ChartWrap = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(2)}px;

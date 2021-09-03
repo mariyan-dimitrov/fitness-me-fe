@@ -5,13 +5,15 @@ import format from "date-fns/format";
 import cn from "classnames";
 
 import DateTimePicker from "./final-form-fields/DateTimePicker";
+import activityOptions from "../../_constants/activityOptions";
 import useValidateInput from "../hooks/useValidateInput";
 import TextField from "./final-form-fields/TextField";
 import useTranslate from "../hooks/useTranslate";
+import Select from "./final-form-fields/Select";
 import hexToRgb from "../../utils/hexToRgb";
 import Row from "../common/Row";
 
-const WeightForm = ({
+const WorkoutForm = ({
   onSubmit,
   cancelEdit,
   cancelRemove,
@@ -25,21 +27,22 @@ const WeightForm = ({
   const editMode = Boolean(Object.keys(editModeValues).length);
 
   const validate = formState => {
-    const { mass, day } = formState;
+    const { distance, date } = formState;
     const errors = {};
 
     validateInput([
       {
-        name: "mass",
-        value: mass,
+        name: "distance",
+        value: distance,
         rules: {
           isRequired: true,
+          isNumber: true,
         },
         errors,
       },
       {
-        name: "day",
-        value: day,
+        name: "date",
+        value: date,
         rules: {
           isRequired: true,
         },
@@ -56,7 +59,7 @@ const WeightForm = ({
       validate={validate}
       initialValues={{
         ...(removeMode ? removeModeValues : editModeValues),
-        day: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
+        date: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
       }}
       render={({ handleSubmit, form, errors }) => {
         const hasErrors = Boolean(Object.keys(errors).length);
@@ -73,21 +76,34 @@ const WeightForm = ({
               }}
             >
               <Row className="is-aligned-center">
-                {!editMode && !removeMode && <h2>{i18n("WEIGHT_PAGE.HOW_MUCH_DO_YOU_WEIGHT")}</h2>}
-                {editMode && <h2>{i18n("WEIGHT_PAGE.EDIT_WEIGHT_RECORD")}</h2>}
-                {removeMode && <h2>{i18n("WEIGHT_PAGE.REMOVE_WEIGHT_RECORD")}</h2>}
+                {!editMode && !removeMode && (
+                  <h2>{i18n("WORKOUT_PAGE.HOW_MUCH_DID_YOU_WORKOUT")}</h2>
+                )}
+                {editMode && <h2>{i18n("WORKOUT_PAGE.EDIT_WORKOUT_RECORD")}</h2>}
+                {removeMode && <h2>{i18n("WORKOUT_PAGE.REMOVE_WORKOUT_RECORD")}</h2>}
               </Row>
 
               <Row>
                 <TextField
-                  name="mass"
-                  label={i18n("FIELD_LABELS.WEIGHT_KG")}
+                  name="distance"
+                  type="number"
+                  label={i18n("FIELD_LABELS.DISTANCE_KM")}
                   disabled={removeMode}
                 />
               </Row>
 
               <Row>
-                <DateTimePicker name="day" disabled={removeMode} />
+                <Select
+                  name="categoryId"
+                  type="number"
+                  label={i18n("FIELD_LABELS.ACTIVITY")}
+                  disabled={removeMode}
+                  options={activityOptions}
+                />
+              </Row>
+
+              <Row>
+                <DateTimePicker name="date" disabled={removeMode} />
               </Row>
 
               <Row className="is-aligned-right">
@@ -125,7 +141,7 @@ const WeightForm = ({
   );
 };
 
-export default WeightForm;
+export default WorkoutForm;
 
 const StyledFormWrapper = styled(Paper)`
   padding: ${({ theme }) => theme.spacing(2)}px;

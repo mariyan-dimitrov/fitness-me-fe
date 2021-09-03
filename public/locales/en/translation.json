@@ -5,12 +5,13 @@
     "REGISTER": "Register",
     "FOODS": "Foods",
     "MEAL": "Meal",
-    "WEIGHT": "Weight"
+    "WEIGHT": "Weight",
+    "WORKOUT": "Workout"
   },
   "WEIGHT_PAGE": {
     "WEIGHT_HISTORY": "Weight History",
     "WEIGHT_PROGRESS": "Weight Progress",
-    "WEIGHT": "Weight",
+    "WEIGHT_KG": "Weight (kg)",
     "DATE": "Date",
     "HOW_MUCH_DO_YOU_WEIGHT": "How much do you weight?",
     "EDIT_WEIGHT_RECORD": "Edit weight record",
@@ -27,6 +28,13 @@
     "CONTAINS_PER_100": "Contains per 100g",
     "EDIT_FOOD_PRODUCT": "Edit food product",
     "REMOVE_FOOD_PRODUCT": "Remove food product"
+  },
+  "WORKOUT_PAGE": {
+    "WORKOUT_PROGRESS": "Workout progress",
+    "DISTANCE_KM": "Distance (km)",
+    "DATE": "Date",
+    "RUNNING": "Running",
+    "HOW_MUCH_DID_YOU_WORKOUT": "How much did you workout?"
   },
   "MEAL_PAGE": {
     "FOOD_NAME": "Food Name",
@@ -56,12 +64,15 @@
     "CONFIRM_PASSWORD": "Confirm Password",
     "USERNAME": "User Name",
     "REMEMBER_ME": "Remember me",
-    "MASS": "Mass",
+    "MASS": "Body Mass (kg)",
+    "WEIGHT_KG": "Weight (kg)",
     "CARBS": "Carbs",
     "PROTEIN": "Protein",
     "NAME": "Name",
     "FATS": "Fats",
-    "PORTION": "Portion"
+    "PORTION": "Portion",
+    "DISTANCE_KM": "Distance (km)",
+    "ACTIVITY": "Activity"
   },
   "FORM_VALIDATION_MESSAGES": {
     "FIELD_IS_REQUIRED": "Field is required",
@@ -99,13 +110,21 @@
     "SOMETHING_WENT_WRONG": "Something went wrong!",
     "NOT_ALLOWED": "Not allowed!",
     "WEIGHT_CREATED": "Weight entry successfully created!",
+    "WORKOUT_CREATED": "Workout entry successfully created!",
     "FOOD_CREATED": "Food successfully created!",
     "MEAL_CREATED": "Meal successfully created!",
     "WEIGHT_CHANGED": "Weight entry successfully changed!",
+    "WORKOUT_CHANGED": "Workout entry successfully changed!",
     "FOOD_CHANGED": "Food successfully changed!",
     "MEAL_CHANGED": "Meal successfully changed!",
     "WEIGHT_DELETED": "Weight entry successfully deleted!",
+    "WORKOUT_DELETED": "Workout entry successfully deleted!",
     "FOOD_DELETED": "Food successfully deleted!",
-    "MEAL_DELETED": "Meal successfully deleted!"
+    "MEAL_DELETED": "Meal successfully deleted!",
+    "UNAUTHORIZED": "Unauthorized"
+  },
+  "LANGUAGES": {
+    "EN": "EN",
+    "BG": "BG"
   }
 }

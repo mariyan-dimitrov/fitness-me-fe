@@ -1,5 +1,6 @@
 import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import { Fastfood as FastFoodIcon } from "@material-ui/icons";
+import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import KitchenIcon from "@material-ui/icons/Kitchen";
@@ -26,6 +27,10 @@ const menuItems = [
   {
     pageName: "foods",
     Icon: KitchenIcon,
+  },
+  {
+    pageName: "workout",
+    Icon: FitnessCenterIcon,
   },
 ];
 

@@ -26,7 +26,7 @@ const MealForm = ({
   const editMode = Boolean(Object.keys(editModeValues).length);
 
   const validate = formState => {
-    const { foodId, portion, day } = formState;
+    const { foodId, portion, date } = formState;
     const errors = {};
 
     validateInput([
@@ -50,8 +50,8 @@ const MealForm = ({
         errors,
       },
       {
-        name: "day",
-        value: day,
+        name: "date",
+        value: date,
         rules: {
           isRequired: true,
         },
@@ -68,7 +68,7 @@ const MealForm = ({
       validate={validate}
       initialValues={{
         ...(removeMode ? removeModeValues : editModeValues),
-        day: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
+        date: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
       }}
       render={({ handleSubmit, form, errors }) => {
         const hasErrors = Boolean(Object.keys(errors).length);
@@ -109,7 +109,7 @@ const MealForm = ({
               </Row>
 
               <Row>
-                <DateTimePicker name="day" disabled={removeMode} />
+                <DateTimePicker name="date" disabled={removeMode} />
               </Row>
 
               <Row className="is-aligned-right">

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components/macro";
 import {
+  Language as LanguageIcon,
   ColorLens as ColorLensIcon,
   Settings as SettingsIcon,
   ExitToApp as LogoutIcon,
@@ -33,7 +34,7 @@ const AvatarPopover = () => {
   const { user, lang } = useGlobalContext();
   const { theme, themeColor, muiTheme, availableColors, toggleTheme, setThemeColor } =
     useThemeContext();
-  const [showUserPopover, setShowUserPopover] = useState(false);
+  const [showUserPopover, setShowUserPopover] = useState(true);
   const i18n = useTranslate();
   const logout = useLogout();
   const avatarRef = useRef();
@@ -100,14 +101,17 @@ const AvatarPopover = () => {
 
               <ListItem className="theme-colors-wrap">
                 <ListItemIcon>
-                  <ColorLensIcon color="primary" />
+                  <LanguageIcon color="primary" />
                 </ListItemIcon>
 
-                <Switch
-                  label="Lang"
-                  checked={lang === "en"}
-                  onChange={() => changeLanguage(lang === "en" ? "bg" : "en")}
-                />
+                <SwitchWrap>
+                  <div>{i18n("LANGUAGES.BG")}</div>
+                  <Switch
+                    checked={lang === "en"}
+                    onChange={() => changeLanguage(lang === "en" ? "bg" : "en")}
+                  />
+                  <div>{i18n("LANGUAGES.EN")}</div>
+                </SwitchWrap>
               </ListItem>
 
               <Divider />
@@ -173,6 +177,12 @@ const PopoverContent = styled.div`
       padding: 0;
     }
   }
+`;
+
+const SwitchWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const RadioWrap = styled.div`

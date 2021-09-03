@@ -1,3 +1,4 @@
+import TablePagination from "@material-ui/core/TablePagination";
 import { useCallback, useEffect, useState } from "react";
 
 import assetTypes from "../../_constants/assetTypes";
@@ -9,6 +10,8 @@ import Table from "../common/Table";
 const Meal = () => {
   const [removeModeValues, setRemoveModeValues] = useState({});
   const [editModeValues, setEditModeValues] = useState({});
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
   const [foodRecords, setFoodRecords] = useState(false);
   const [mealRecords, setMealRecords] = useState(false);
   const { getAll, create, change, remove } = useApi();
@@ -30,7 +33,7 @@ const Meal = () => {
   const cancelEdit = () => setEditModeValues({});
 
   const getAllMeals = useCallback(
-    () => getAll(assetTypes.meal.name).then(({ data }) => setMealRecords(data)),
+    pagination => getAll(assetTypes.meal.name, pagination).then(({ data }) => setMealRecords(data)),
     [getAll]
   );
 
@@ -57,8 +60,8 @@ const Meal = () => {
   };
 
   useEffect(() => {
-    !mealRecords && getAllMeals();
-  }, [getAllMeals, mealRecords]);
+    getAllMeals({ pageSize, pageNumber });
+  }, [getAllMeals, pageSize, pageNumber]);
 
   useEffect(() => {
     !foodRecords && getAllFoods();
@@ -93,6 +96,18 @@ const Meal = () => {
             accessor: "Portion",
           },
         ]}
+      />
+
+      <TablePagination
+        component="div"
+        count={100}
+        page={pageNumber}
+        onPageChange={(event, newPage) => setPageNumber(newPage)}
+        rowsPerPage={pageSize}
+        onRowsPerPageChange={event => {
+          setPageSize(parseInt(event.target.value, 10));
+          setPageNumber(0);
+        }}
       />
     </>
   );

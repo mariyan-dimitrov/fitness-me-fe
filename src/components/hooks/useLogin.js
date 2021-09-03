@@ -5,6 +5,7 @@ import axios from "axios";
 import { useCookieContext } from "../contexts/CookieContext";
 import { useGlobalContext } from "../contexts/GlobalContext";
 import session_storage from "../../utils/session_storage";
+import useHandleHttpError from "./useHandleHttpError";
 import hostURL from "../../_constants/serverApiUrl";
 import useRouter from "./useRouter";
 import useRoutes from "./useRoutes";
@@ -12,6 +13,7 @@ import useRoutes from "./useRoutes";
 const useLogin = () => {
   const { updateGlobalState } = useGlobalContext();
   const { setCookie } = useCookieContext();
+  const handleHttpError = useHandleHttpError();
   const { pushRoute } = useRouter();
   const { routes } = useRoutes();
 
@@ -36,8 +38,8 @@ const useLogin = () => {
           pushRoute(routes.homepage.url);
           toast.success(`Welcome!`);
         })
-        .catch(console.error),
-    [pushRoute, routes.homepage.url, setCookie, updateGlobalState]
+        .catch(handleHttpError),
+    [pushRoute, handleHttpError, routes.homepage.url, setCookie, updateGlobalState]
   );
 
   return login;

@@ -10,6 +10,7 @@ import useRoutes from "../hooks/useRoutes";
 import Header from "../common/Header";
 import NotFound from "./NotFound";
 import Menu from "../common/Menu";
+import Workout from "./Workout";
 import Weight from "./Weight";
 import Foods from "./Foods";
 import Meal from "./Meal";
@@ -51,6 +52,10 @@ const PrivateRouteWrapper = () => {
 
             <Route exact path={routes.weight.url}>
               <Weight />
+            </Route>
+
+            <Route exact path={routes.workout.url}>
+              <Workout />
             </Route>
 
             <Route>

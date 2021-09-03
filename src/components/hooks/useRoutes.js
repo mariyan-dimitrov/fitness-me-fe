@@ -38,6 +38,11 @@ const useRoutes = () => {
       name: i18n("PAGE_NAMES.WEIGHT"),
       singularName: i18n("PAGE_NAMES.WEIGHT"),
     },
+    workout: {
+      url: "/workout",
+      name: i18n("PAGE_NAMES.WORKOUT"),
+      singularName: i18n("PAGE_NAMES.WORKOUT"),
+    },
   };
 
   const stringifiedRoutes = JSON.stringify(routes);
