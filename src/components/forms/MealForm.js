@@ -67,8 +67,8 @@ const MealForm = ({
       onSubmit={onSubmit}
       validate={validate}
       initialValues={{
-        ...(removeMode ? removeModeValues : editModeValues),
         date: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
+        ...(removeMode ? removeModeValues : editModeValues),
       }}
       render={({ handleSubmit, form, errors }) => {
         const hasErrors = Boolean(Object.keys(errors).length);

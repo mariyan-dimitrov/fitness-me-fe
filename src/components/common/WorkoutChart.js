@@ -3,20 +3,15 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import useTranslate from "../hooks/useTranslate";
 
-const sortyByDate = (a, b) => {
-  const [aDate] = a;
-  const [bDate] = b;
-
-  return aDate - bDate;
-};
-
 const WorkoutChart = ({ workoutRecords }) => {
   const i18n = useTranslate();
   const theme = useTheme();
 
   const chartData =
     workoutRecords &&
-    workoutRecords.map(({ mass, day }) => [new Date(day).getTime(), mass]).sort(sortyByDate);
+    workoutRecords
+      .map(({ distance, date }) => [new Date(date).getTime(), distance])
+      .sort((a, b) => a[0] - b[0]);
 
   if (!workoutRecords) {
     return null;
@@ -110,6 +105,17 @@ const WorkoutChart = ({ workoutRecords }) => {
             color: theme.palette.text.primary,
           },
         },
+        minRange: 3,
+        min: 0,
+        plotLines: [
+          {
+            color: "red",
+            height: 1,
+            value: 3,
+            zIndex: 999995,
+            dashStyle: "longdash",
+          },
+        ],
       },
     ],
     series: [

@@ -121,7 +121,8 @@
     "WORKOUT_DELETED": "Workout entry successfully deleted!",
     "FOOD_DELETED": "Food successfully deleted!",
     "MEAL_DELETED": "Meal successfully deleted!",
-    "UNAUTHORIZED": "Unauthorized"
+    "UNAUTHORIZED": "Unauthorized",
+    "BAD_REQUEST": "Bad request"
   },
   "LANGUAGES": {
     "EN": "EN",

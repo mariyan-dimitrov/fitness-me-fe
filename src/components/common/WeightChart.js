@@ -3,20 +3,15 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import useTranslate from "../hooks/useTranslate";
 
-const sortyByDate = (a, b) => {
-  const [aDate] = a;
-  const [bDate] = b;
-
-  return aDate - bDate;
-};
-
 const WeightChart = ({ weightRecords }) => {
   const i18n = useTranslate();
   const theme = useTheme();
 
   const chartData =
     weightRecords &&
-    weightRecords.map(({ mass, day }) => [new Date(day).getTime(), mass]).sort(sortyByDate);
+    weightRecords
+      .map(({ mass, day }) => [new Date(day).getTime(), mass])
+      .sort((a, b) => a[0] - b[0]);
 
   if (!weightRecords) {
     return null;

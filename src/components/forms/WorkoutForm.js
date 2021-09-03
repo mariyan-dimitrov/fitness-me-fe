@@ -58,8 +58,9 @@ const WorkoutForm = ({
       onSubmit={onSubmit}
       validate={validate}
       initialValues={{
-        ...(removeMode ? removeModeValues : editModeValues),
         date: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
+        categoryId: "0",
+        ...(removeMode ? removeModeValues : editModeValues),
       }}
       render={({ handleSubmit, form, errors }) => {
         const hasErrors = Boolean(Object.keys(errors).length);

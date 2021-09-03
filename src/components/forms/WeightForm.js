@@ -55,8 +55,8 @@ const WeightForm = ({
       onSubmit={onSubmit}
       validate={validate}
       initialValues={{
-        ...(removeMode ? removeModeValues : editModeValues),
         day: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
+        ...(removeMode ? removeModeValues : editModeValues),
       }}
       render={({ handleSubmit, form, errors }) => {
         const hasErrors = Boolean(Object.keys(errors).length);

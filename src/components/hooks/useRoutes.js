@@ -16,32 +16,26 @@ const useRoutes = () => {
     login: {
       url: "/login",
       name: i18n("PAGE_NAMES.LOGIN"),
-      singularName: i18n("PAGE_NAMES.LOGIN"),
     },
     register: {
       url: "/register",
       name: i18n("PAGE_NAMES.REGISTER"),
-      singularName: i18n("PAGE_NAMES.REGISTER"),
     },
     foods: {
       url: "/foods",
       name: i18n("PAGE_NAMES.FOODS"),
-      singularName: i18n("PAGE_NAMES.FOODS"),
     },
     meal: {
       url: "/meal",
       name: i18n("PAGE_NAMES.MEAL"),
-      singularName: i18n("PAGE_NAMES.MEAL"),
     },
     weight: {
       url: "/weight",
       name: i18n("PAGE_NAMES.WEIGHT"),
-      singularName: i18n("PAGE_NAMES.WEIGHT"),
     },
     workout: {
       url: "/workout",
       name: i18n("PAGE_NAMES.WORKOUT"),
-      singularName: i18n("PAGE_NAMES.WORKOUT"),
     },
   };
 

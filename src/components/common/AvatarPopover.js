@@ -34,7 +34,7 @@ const AvatarPopover = () => {
   const { user, lang } = useGlobalContext();
   const { theme, themeColor, muiTheme, availableColors, toggleTheme, setThemeColor } =
     useThemeContext();
-  const [showUserPopover, setShowUserPopover] = useState(true);
+  const [showUserPopover, setShowUserPopover] = useState(false);
   const i18n = useTranslate();
   const logout = useLogout();
   const avatarRef = useRef();
