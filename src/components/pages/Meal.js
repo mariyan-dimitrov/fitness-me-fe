@@ -1,19 +1,20 @@
-import TablePagination from "@material-ui/core/TablePagination";
 import { useCallback, useEffect, useState } from "react";
 
+import dateFormat from "../../_constants/dateFormat";
 import assetTypes from "../../_constants/assetTypes";
 import useTranslate from "../hooks/useTranslate";
 import MealForm from "../forms/MealForm";
+import format from "date-fns/format";
 import useApi from "../hooks/useApi";
 import Table from "../common/Table";
 
 const Meal = () => {
   const [removeModeValues, setRemoveModeValues] = useState({});
   const [editModeValues, setEditModeValues] = useState({});
-  const [pageNumber, setPageNumber] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
   const [foodRecords, setFoodRecords] = useState(false);
   const [mealRecords, setMealRecords] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
   const { getAll, create, change, remove } = useApi();
   const i18n = useTranslate();
 
@@ -67,6 +68,10 @@ const Meal = () => {
     !foodRecords && getAllFoods();
   }, [getAllFoods, foodRecords]);
 
+  if (!foodRecords) {
+    return null;
+  }
+
   return (
     <>
       <MealForm
@@ -80,26 +85,13 @@ const Meal = () => {
 
       <Table
         hasActions
+        hasPagination
+        csvFileName={`${i18n("CSV_FILENAMES.MEAL_RECORDS")} ${format(new Date(), dateFormat)}`}
         isLoading={!mealRecords}
         data={mealRecords || []}
         handleEdit={handleStartEdit}
         handleRemove={handleStartRemove}
         editingRowId={editModeValues.id}
-        removingRowId={removeModeValues.id}
-        structure={[
-          {
-            header: i18n("MEAL_PAGE.TYPE_OF_FOOD"),
-            accessor: ({ foodId }) => foodRecords.find(foodRecord => foodRecords.foodId === foodId),
-          },
-          {
-            header: i18n("MEAL_PAGE.PORTIONS"),
-            accessor: "Portion",
-          },
-        ]}
-      />
-
-      <TablePagination
-        component="div"
         count={100}
         page={pageNumber}
         onPageChange={(event, newPage) => setPageNumber(newPage)}
@@ -108,6 +100,19 @@ const Meal = () => {
           setPageSize(parseInt(event.target.value, 10));
           setPageNumber(0);
         }}
+        removingRowId={removeModeValues.id}
+        structure={[
+          {
+            header: i18n("MEAL_PAGE.TYPE_OF_FOOD"),
+            accessor: ({ id }) => foodRecords.find(foodRecord => foodRecord.id === id)?.name,
+            key: "foodId",
+          },
+          {
+            header: i18n("MEAL_PAGE.PORTIONS"),
+            accessor: "portion",
+            key: "Portion",
+          },
+        ]}
       />
     </>
   );

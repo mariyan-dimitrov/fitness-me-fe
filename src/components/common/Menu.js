@@ -15,32 +15,33 @@ import hexToRgb from "../../utils/hexToRgb";
 import useRoutes from "../hooks/useRoutes";
 import useRouter from "../hooks/useRouter";
 
-const menuItems = [
-  {
-    pageName: "weight",
-    Icon: AccessibilityIcon,
-  },
-  {
-    pageName: "meal",
-    Icon: FastFoodIcon,
-  },
-  {
-    pageName: "foods",
-    Icon: KitchenIcon,
-  },
-  {
-    pageName: "workout",
-    Icon: FitnessCenterIcon,
-  },
-];
-
 const Menu = () => {
-  const { isMenuOpened } = useGlobalContext();
+  const { isMenuOpened, user } = useGlobalContext();
   const [skipAnimation, setSkipAnimation] = useState(true);
   const currentPageName = usePageNameFromUrl();
   const { pushRoute } = useRouter();
   const { routes } = useRoutes();
   const lastMenuOpenState = useRef(isMenuOpened);
+
+  const menuItems = [
+    {
+      pageName: "weight",
+      Icon: AccessibilityIcon,
+    },
+    {
+      pageName: "meal",
+      Icon: FastFoodIcon,
+    },
+    {
+      pageName: "foods",
+      Icon: KitchenIcon,
+    },
+    {
+      pageName: "workout",
+      Icon: FitnessCenterIcon,
+      isHidden: user?.role !== "premium",
+    },
+  ];
 
   useEffect(() => {
     skipAnimation && lastMenuOpenState.current !== isMenuOpened && setSkipAnimation(false);
@@ -54,21 +55,23 @@ const Menu = () => {
         "is-menu-closed": !isMenuOpened,
       })}
     >
-      {menuItems.map(({ pageName, Icon }) => (
-        <StyledListItem
-          button
-          onClick={() => pushRoute(routes[pageName].url)}
-          className={cn({ "is-active": routes[pageName].name === currentPageName })}
-          key={pageName}
-        >
-          <ListItemIcon>
-            <IconWrap className="icon-wrap">
-              <Icon />
-            </IconWrap>
-          </ListItemIcon>
-          <ListItemText primary={routes[pageName].name} />
-        </StyledListItem>
-      ))}
+      {menuItems
+        .filter(({ isHidden }) => !isHidden)
+        .map(({ pageName, Icon }) => (
+          <StyledListItem
+            button
+            onClick={() => pushRoute(routes[pageName].url)}
+            className={cn({ "is-active": routes[pageName].name === currentPageName })}
+            key={pageName}
+          >
+            <ListItemIcon>
+              <IconWrap className="icon-wrap">
+                <Icon />
+              </IconWrap>
+            </ListItemIcon>
+            <ListItemText primary={routes[pageName].name} />
+          </StyledListItem>
+        ))}
     </Wrap>
   );
 };

@@ -1,8 +1,8 @@
 import { useHistory, useLocation } from "react-router";
+import { Suspense, useEffect, lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components/macro";
 import Paper from "@material-ui/core/Paper";
-import { useEffect } from "react";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import useRouter from "../hooks/useRouter";
@@ -10,10 +10,11 @@ import useRoutes from "../hooks/useRoutes";
 import Header from "../common/Header";
 import NotFound from "./NotFound";
 import Menu from "../common/Menu";
-import Workout from "./Workout";
 import Weight from "./Weight";
 import Foods from "./Foods";
 import Meal from "./Meal";
+
+const Workout = lazy(() => import("./Workout"));
 
 const PrivateRouteWrapper = () => {
   const { user } = useGlobalContext();
@@ -54,9 +55,13 @@ const PrivateRouteWrapper = () => {
               <Weight />
             </Route>
 
-            <Route exact path={routes.workout.url}>
-              <Workout />
-            </Route>
+            {user?.role === "premium" && (
+              <Route exact path={routes.workout.url}>
+                <Suspense fallback={null}>
+                  <Workout />
+                </Suspense>
+              </Route>
+            )}
 
             <Route>
               <NotFound />

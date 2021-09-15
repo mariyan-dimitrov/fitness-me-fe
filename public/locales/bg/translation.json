@@ -5,7 +5,7 @@
     "REGISTER": "Регистрирай се",
     "FOODS": "Храни",
     "MEAL": "Ястия",
-    "WEIGHT": "Тело",
+    "WEIGHT": "Тегло",
     "WORKOUT": "Тренировка"
   },
   "WEIGHT_PAGE": {
@@ -83,21 +83,29 @@
     "INVALID_EMAIL": "Невалиден имейл",
     "MUST_NOT_CONTAIN_ANY_NUMBERS": "Не трябва да съдържа числа",
     "SHOULD_NOT_END_WITH_TRAILING_SPACES": "Не трябва да има празна надставка",
-    "VALUES_DONT_MATCH": "Стойностите не съвпадат"
+    "VALUES_DONT_MATCH": "Стойностите не съвпадат",
+    "ENTRY_ALREADY_EXISTS": "Вече съществува такъв запис"
   },
   "GENERAL_ACTIONS": {
     "ADD": "Добави",
     "EDIT": "Редактирай",
-    "SUBMIT": "Давай",
+    "SUBMIT": "Напред",
     "CANCEL": "Отказ",
     "REMOVE": "Изтрий",
     "ARE_YOU_SURE_DELETE": "Сигурни ли сте, че искате да изтрийте този запис?",
     "OPEN_MENU": "Отвори меню",
     "CLOSE_MENU": "Затвори меню"
   },
-  "TABLE_HEADERS": {
+  "TABLE_ACTIONS": {
     "EDIT": "Редактиране",
-    "DELETE": "Изтриване"
+    "DELETE": "Изтриване",
+    "DOWNLOAD_CSV": "Изтегли CSV"
+  },
+  "CSV_FILENAMES": {
+    "WEIGHT_RECORDS": "Записи на тегло",
+    "MEAL_RECORDS": "Записи на ястия",
+    "FOOD_RECORDS": "Записи на храни",
+    "WORKOUT_RECORDS": "Записи на тренировки"
   },
   "TOAST_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Генерална грешка",

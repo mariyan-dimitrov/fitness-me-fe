@@ -3,10 +3,11 @@ import styled from "styled-components/macro";
 import {
   Language as LanguageIcon,
   ColorLens as ColorLensIcon,
-  Settings as SettingsIcon,
   ExitToApp as LogoutIcon,
   Brightness2 as DarkIcon,
+  Person as PersonIcon,
   WbSunny as LightIcon,
+  Star as StarIcon,
 } from "@material-ui/icons";
 
 import {
@@ -50,7 +51,14 @@ const AvatarPopover = () => {
           </Tooltip>
 
           <StyledAvatar onClick={() => setShowUserPopover(true)} ref={avatarRef}>
-            <SettingsIcon />
+            <OuterIconWrap>
+              <PersonIcon />
+              {user.role === "premium" && (
+                <IconWrap>
+                  <StarIcon />
+                </IconWrap>
+              )}
+            </OuterIconWrap>
           </StyledAvatar>
         </AvatarWrap>
       )}
@@ -151,6 +159,7 @@ const StyledAvatar = styled(Avatar)`
     cursor: pointer;
     color: ${({ theme }) => theme.palette.primary.main};
     background-color: #fff;
+    overflow: visible;
   }
 `;
 
@@ -196,5 +205,27 @@ const RadioWrap = styled.div`
   .MuiIconButton-colorSecondary,
   .MuiRadio-colorSecondary.Mui-checked {
     color: ${({ themeColor }) => themeColor};
+  }
+`;
+
+const OuterIconWrap = styled.div`
+  position: relative;
+`;
+
+const IconWrap = styled.div`
+  position: absolute;
+  top: -50%;
+  right: -75%;
+  color: ${({ theme }) => theme.palette.orange.primary.dark};
+  animation: premium 0.5s ease alternate infinite;
+
+  @keyframes premium {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.25);
+    }
   }
 `;

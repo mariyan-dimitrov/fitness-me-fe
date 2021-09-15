@@ -6,7 +6,7 @@ const useValidateInput = () => {
 
   const validate = useCallback(
     ({ name, value, rules = {}, errors = {} }) => {
-      const { isEmail, isNumber, minValue, minLength, isEqualTo, isRequired } = rules;
+      const { isEmail, isNumber, minValue, minLength, isEqualTo, notIn, isRequired } = rules;
 
       const addError = message => {
         errors[name] = message;
@@ -34,6 +34,10 @@ const useValidateInput = () => {
 
       if (isEqualTo && isEqualTo !== value) {
         addError(i18n("FORM_VALIDATION_MESSAGES.VALUES_DONT_MATCH"));
+      }
+
+      if (notIn && notIn.includes(value)) {
+        addError(i18n("FORM_VALIDATION_MESSAGES.ENTRY_ALREADY_EXISTS"));
       }
 
       if (value && value.length < 8 && /^\s+|\s+$/.test(value)) {

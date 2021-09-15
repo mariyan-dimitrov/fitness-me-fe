@@ -1,5 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
+import format from "date-fns/format";
 
+import dateFormat from "../../_constants/dateFormat";
 import assetTypes from "../../_constants/assetTypes";
 import useTranslate from "../hooks/useTranslate";
 import FoodStat from "../common/FoodStat";
@@ -64,6 +66,7 @@ const Foods = () => {
       <FoodForm
         onSubmit={onSubmit}
         cancelEdit={cancelEdit}
+        foodRecords={foodRecords}
         cancelRemove={cancelRemove}
         editModeValues={editModeValues}
         removeModeValues={removeModeValues}
@@ -73,6 +76,7 @@ const Foods = () => {
         hasActions
         isLoading={!foodRecords}
         data={foodRecords || []}
+        csvFileName={`${i18n("CSV_FILENAMES.MEAL_RECORDS")} ${format(new Date(), dateFormat)}`}
         handleEdit={handleStartEdit}
         handleRemove={handleStartRemove}
         editingRowId={editModeValues.id}
@@ -81,24 +85,28 @@ const Foods = () => {
           {
             header: i18n("FOOD_PAGE.NAME"),
             accessor: "name",
+            key: "name",
           },
           {
             header: i18n("FOOD_PAGE.PROTEIN"),
             accessor: "protein",
+            key: "protein",
           },
           {
             header: i18n("FOOD_PAGE.CARBS"),
             accessor: "carbs",
+            key: "carbs",
           },
           {
             header: i18n("FOOD_PAGE.FATS"),
             accessor: "fats",
+            key: "fats",
           },
           {
             header: i18n("FOOD_PAGE.OVERVIEW"),
-            accessor: props => {
-              return <FoodStat {...props} />;
-            },
+            accessor: props => <FoodStat {...props} />,
+            skipForCSV: true,
+            key: "fats",
           },
         ]}
       />

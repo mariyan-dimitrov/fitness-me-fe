@@ -76,6 +76,7 @@ const Weight = () => {
 
       <Table
         hasActions
+        csvFileName={`${i18n("CSV_FILENAMES.WEIGHT_RECORDS")} ${format(new Date(), dateFormat)}`}
         isLoading={!weightRecords}
         data={weightRecords || []}
         handleEdit={handleStartEdit}
@@ -86,10 +87,12 @@ const Weight = () => {
           {
             header: i18n("WEIGHT_PAGE.WEIGHT_KG"),
             accessor: "mass",
+            key: "mass",
           },
           {
             header: i18n("WEIGHT_PAGE.DATE"),
             accessor: ({ day }) => format(new Date(day), dateFormat),
+            key: "day",
           },
         ]}
       />

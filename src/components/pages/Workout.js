@@ -76,6 +76,7 @@ const Workout = () => {
 
       <Table
         hasActions
+        csvFileName={`${i18n("CSV_FILENAMES.WORKOUT_RECORDS")} ${format(new Date(), dateFormat)}`}
         isLoading={!workoutRecords}
         data={workoutRecords || []}
         handleEdit={handleStartEdit}
@@ -86,10 +87,12 @@ const Workout = () => {
           {
             header: i18n("WORKOUT_PAGE.DISTANCE_KM"),
             accessor: "distance",
+            key: "distance",
           },
           {
             header: i18n("WORKOUT_PAGE.DATE"),
             accessor: ({ date }) => format(new Date(date), dateFormat),
+            key: "date",
           },
         ]}
       />

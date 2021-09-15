@@ -90,7 +90,8 @@
     "INPUTS_DOESNT_MATCH": "Inputs doesn't match",
     "SHOULD_NOT_END_WITH_TRAILING_SPACES": "Should not end with trailing spaces",
     "SHOULD_BE_BETWEEN_VALUES": "Should be a value between {{min}} and {{max}}",
-    "VALUES_DONT_MATCH": "Values don't match"
+    "VALUES_DONT_MATCH": "Values don't match",
+    "ENTRY_ALREADY_EXISTS": "Entry already exists"
   },
   "GENERAL_ACTIONS": {
     "ADD": "Add",
@@ -102,9 +103,16 @@
     "OPEN_MENU": "Open Menu",
     "CLOSE_MENU": "Close Menu"
   },
-  "TABLE_HEADERS": {
+  "TABLE_ACTIONS": {
     "EDIT": "Edit",
-    "DELETE": "Delete"
+    "DELETE": "Delete",
+    "DOWNLOAD_CSV": "Download CSV"
+  },
+  "CSV_FILENAMES": {
+    "WEIGHT_RECORDS": "Weight records",
+    "MEAL_RECORDS": "Meal records",
+    "FOOD_RECORDS": "Food records",
+    "WORKOUT_RECORDS": "workout records"
   },
   "TOAST_MESSAGES": {
     "SOMETHING_WENT_WRONG": "Something went wrong!",

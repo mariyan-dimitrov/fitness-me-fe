@@ -13,6 +13,7 @@ import Row from "../common/Row";
 const FoodForm = ({
   onSubmit,
   cancelEdit,
+  foodRecords,
   cancelRemove,
   editModeValues = {},
   removeModeValues = {},
@@ -34,6 +35,7 @@ const FoodForm = ({
         value: name,
         rules: {
           isRequired: true,
+          notIn: foodRecords ? foodRecords.map(({ name }) => name) : [],
         },
         errors,
       },

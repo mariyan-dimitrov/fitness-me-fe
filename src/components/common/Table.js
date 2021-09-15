@@ -1,5 +1,7 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
+import TablePagination from "@material-ui/core/TablePagination";
 import TableContainer from "@material-ui/core/TableContainer";
+import DownloadIcon from "@material-ui/icons/GetApp";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
@@ -9,25 +11,58 @@ import MuiTable from "@material-ui/core/Table";
 import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
+import { useState, useEffect } from "react";
+import { CSVLink } from "react-csv";
 import cn from "classnames";
 
 import useTranslate from "../hooks/useTranslate";
 import styled from "styled-components/macro";
 import hexToRgb from "../../utils/hexToRgb";
+import Tooltip from "./Tooltip";
 
 const Table = ({
-  component = Paper,
   data,
+  page,
+  count,
+  component = Paper,
   isLoading,
   minheight = 400,
   structure,
   hasActions,
   handleEdit,
+  rowsPerPage,
+  csvFileName,
   editingRowId,
-  removingRowId,
   handleRemove,
+  onPageChange,
+  removingRowId,
+  hasPagination,
+  onRowsPerPageChange,
 }) => {
   const i18n = useTranslate();
+  const [csvHeaders, setCSVHeaders] = useState([]);
+  const [csvData, setCSVData] = useState([]);
+
+  useEffect(() => {
+    setCSVHeaders(structure.map(({ key, header }) => ({ label: header, key })));
+  }, [structure]);
+
+  useEffect(() => {
+    setCSVData(
+      data.reduce((acc, current) => {
+        const newCurrent = structure.reduce((innerAcc, { accessor, header, skipForCSV, key }) => {
+          return skipForCSV
+            ? innerAcc
+            : {
+                ...innerAcc,
+                [key]: typeof accessor === "string" ? current[accessor] : accessor(current),
+              };
+        }, {});
+
+        return [...acc, newCurrent];
+      }, [])
+    );
+  }, [structure, data]);
 
   return (
     <StyledTableContainer component={component} elevation={3}>
@@ -41,8 +76,8 @@ const Table = ({
             ))}
             {hasActions && (
               <>
-                <ActionCell className="action-edit">{i18n("TABLE_HEADERS.EDIT")}</ActionCell>
-                <ActionCell className="action-delete">{i18n("TABLE_HEADERS.DELETE")}</ActionCell>
+                <ActionCell className="action-edit">{i18n("TABLE_ACTIONS.EDIT")}</ActionCell>
+                <ActionCell className="action-delete">{i18n("TABLE_ACTIONS.DELETE")}</ActionCell>
               </>
             )}
           </TableRow>
@@ -87,6 +122,24 @@ const Table = ({
           ))}
         </TableBody>
       </StyledTable>
+      <TableActions>
+        <StyledCSVLink data={csvData} filename={csvFileName} headers={csvHeaders} target="_blank">
+          <Tooltip placement="left" tooltipText={i18n("TABLE_ACTIONS.DOWNLOAD_CSV")}>
+            <DownloadIcon />
+          </Tooltip>
+        </StyledCSVLink>
+
+        {hasPagination && (
+          <TablePagination
+            component="div"
+            count={count}
+            page={page}
+            onPageChange={onPageChange}
+            rowsPerPage={rowsPerPage}
+            onRowsPerPageChange={onRowsPerPageChange}
+          />
+        )}
+      </TableActions>
 
       {isLoading && (
         <LoadingWrap>
@@ -186,4 +239,17 @@ const LoadingWrap = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.palette.action.disabledBackground};
   overflow: hidden;
+`;
+
+const TableActions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0 ${({ theme }) => theme.spacing(2)}px;
+`;
+
+const StyledCSVLink = styled(CSVLink)`
+  display: inline-block;
+  padding: ${({ theme }) => theme.spacing(2)}px;
 `;
