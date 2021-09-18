@@ -52,7 +52,10 @@ const Workout = () => {
   };
 
   const fetchChartData = useCallback(
-    () => getAll(assetTypes.workout.name).then(({ data }) => setWorkoutRecords(data)),
+    () =>
+      getAll(assetTypes.workout.name).then(({ data }) =>
+        setWorkoutRecords(data.map(item => ({ ...item, date: new Date(item.date) })))
+      ),
     [getAll]
   );
 
@@ -87,11 +90,14 @@ const Workout = () => {
           {
             header: i18n("WORKOUT_PAGE.DISTANCE_KM"),
             accessor: "distance",
+            sortByKey: "distance",
             key: "distance",
           },
+
           {
             header: i18n("WORKOUT_PAGE.DATE"),
-            accessor: ({ date }) => format(new Date(date), dateFormat),
+            accessor: ({ date }) => format(date, dateFormat),
+            sortByKey: "date",
             key: "date",
           },
         ]}

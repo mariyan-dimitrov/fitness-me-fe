@@ -1,6 +1,9 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TablePagination from "@material-ui/core/TablePagination";
+import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import TableContainer from "@material-ui/core/TableContainer";
+import ArrowDropUp from "@material-ui/icons/ArrowDropUp";
+import { useState, useEffect, useCallback } from "react";
 import DownloadIcon from "@material-ui/icons/GetApp";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -11,7 +14,6 @@ import MuiTable from "@material-ui/core/Table";
 import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import cn from "classnames";
 
@@ -20,9 +22,33 @@ import styled from "styled-components/macro";
 import hexToRgb from "../../utils/hexToRgb";
 import Tooltip from "./Tooltip";
 
+const sortMap = {
+  asc: "desc",
+  desc: "asc",
+};
+
+const compareStrings = (a, b, sortDirection) => {
+  if (a > b) {
+    return sortDirection === "asc" ? 1 : -1;
+  } else if (a < b) {
+    return sortDirection === "asc" ? -1 : 1;
+  } else {
+    return 0;
+  }
+};
+
+const compareNumbers = (a, b, sortDirection) => {
+  if (a - b > 0) {
+    return sortDirection === "asc" ? 1 : -1;
+  } else if (a - b < 0) {
+    return sortDirection === "asc" ? -1 : 1;
+  } else {
+    return 0;
+  }
+};
+
 const Table = ({
   data,
-  page,
   count,
   component = Paper,
   isLoading,
@@ -30,18 +56,62 @@ const Table = ({
   structure,
   hasActions,
   handleEdit,
-  rowsPerPage,
   csvFileName,
   editingRowId,
   handleRemove,
-  onPageChange,
   removingRowId,
-  hasPagination,
-  onRowsPerPageChange,
+  hasPagination = true,
 }) => {
   const i18n = useTranslate();
+  const [sortDirection, setSortDirection] = useState("asc");
+  const [visibleItems, setVisibleItems] = useState([]);
   const [csvHeaders, setCSVHeaders] = useState([]);
+  const [pageSize, setPageSize] = useState(10);
+  const [sortBy, setSortBy] = useState(false);
   const [csvData, setCSVData] = useState([]);
+  const [page, setPage] = useState(0);
+
+  const isValidDate = d => d instanceof Date && !isNaN(d);
+
+  const getVisibleItems = useCallback(
+    () =>
+      data
+        .sort((a, b) => {
+          const aSortValue = a[sortBy];
+          const bSortValue = b[sortBy];
+          const aSecondSortValue = a.name;
+          const bSecondSortValue = b.name;
+
+          const areBothNumbers = typeof aSortValue === "number" && typeof bSortValue === "number";
+          const areBothStrings = typeof aSortValue === "string" && typeof bSortValue === "string";
+          const areBothDates = isValidDate(aSortValue) && isValidDate(bSortValue);
+
+          const compareFunction =
+            areBothNumbers || areBothDates
+              ? compareNumbers
+              : areBothStrings
+              ? compareStrings
+              : null;
+
+          if (compareFunction) {
+            const compareResult = compareFunction(aSortValue, bSortValue, sortDirection);
+
+            return compareResult
+              ? compareResult
+              : typeof aSecondSortValue === "number" && typeof bSecondSortValue === "number"
+              ? compareNumbers(aSecondSortValue, bSecondSortValue, sortDirection)
+              : compareStrings(aSecondSortValue, bSecondSortValue, sortDirection);
+          } else {
+            return 0;
+          }
+        })
+        .filter((row, index) => index - pageSize * page >= 0 && index < pageSize * (page + 1)),
+    [data, pageSize, page, sortBy, sortDirection]
+  );
+
+  useEffect(() => {
+    setVisibleItems(getVisibleItems());
+  }, [getVisibleItems]);
 
   useEffect(() => {
     setCSVHeaders(structure.map(({ key, header }) => ({ label: header, key })));
@@ -49,7 +119,7 @@ const Table = ({
 
   useEffect(() => {
     setCSVData(
-      data.reduce((acc, current) => {
+      visibleItems.reduce((acc, current) => {
         const newCurrent = structure.reduce((innerAcc, { accessor, header, skipForCSV, key }) => {
           return skipForCSV
             ? innerAcc
@@ -62,16 +132,34 @@ const Table = ({
         return [...acc, newCurrent];
       }, [])
     );
-  }, [structure, data]);
+  }, [structure, visibleItems]);
 
   return (
     <StyledTableContainer component={component} elevation={3}>
       <StyledTable stickyHeader minheight={minheight}>
         <StyledTableHead>
           <TableRow>
-            {structure.map(({ header, className }) => (
-              <TableCell className={className} key={header}>
+            {structure.map(({ header, className, sortByKey }) => (
+              <TableCell
+                className={cn(className, { "is-column-sortable": Boolean(sortByKey) })}
+                key={header}
+                onClick={
+                  sortByKey
+                    ? () => {
+                        setSortBy(sortByKey);
+                        setSortDirection(sortMap[sortDirection]);
+                      }
+                    : null
+                }
+              >
                 {header}
+
+                {sortBy === sortByKey && sortDirection === "desc" && (
+                  <ArrowDropDown className="table-sort-icon" />
+                )}
+                {sortBy === sortByKey && sortDirection === "asc" && (
+                  <ArrowDropUp className="table-sort-icon" />
+                )}
               </TableCell>
             ))}
             {hasActions && (
@@ -83,7 +171,7 @@ const Table = ({
           </TableRow>
         </StyledTableHead>
         <TableBody>
-          {data.map(item => (
+          {visibleItems.map(item => (
             <StyledTableRow
               className={cn({
                 "is-editing": item.id === editingRowId,
@@ -132,11 +220,14 @@ const Table = ({
         {hasPagination && (
           <TablePagination
             component="div"
-            count={count}
+            count={data.length}
             page={page}
-            onPageChange={onPageChange}
-            rowsPerPage={rowsPerPage}
-            onRowsPerPageChange={onRowsPerPageChange}
+            onPageChange={(e, page) => setPage(page)}
+            rowsPerPage={pageSize}
+            onRowsPerPageChange={event => {
+              setPage(0);
+              setPageSize(parseInt(event.target.value, 10));
+            }}
           />
         )}
       </TableActions>
@@ -163,7 +254,17 @@ const StyledTable = styled(MuiTable)`
 
 const StyledTableHead = styled(TableHead)`
   .MuiTableCell-stickyHeader {
+    position: relative;
     background-color: ${({ theme }) => hexToRgb(theme.palette.primary.dark, 0.3)};
+  }
+
+  .is-column-sortable {
+    cursor: pointer;
+  }
+
+  .table-sort-icon {
+    position: absolute;
+    vertical-align: bottom;
   }
 `;
 

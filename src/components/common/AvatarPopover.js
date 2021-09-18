@@ -26,6 +26,7 @@ import {
 import { useGlobalContext } from "../contexts/GlobalContext";
 import { useThemeContext } from "../contexts/ThemeContext";
 import useChangeLanguage from "../hooks/useChangeLanguage";
+import { rolesForWorkout } from "../../_constants/roles";
 import useTranslate from "../hooks/useTranslate";
 import useLogout from "../hooks/useLogout";
 import Switch from "../forms/fields/Switch";
@@ -53,7 +54,7 @@ const AvatarPopover = () => {
           <StyledAvatar onClick={() => setShowUserPopover(true)} ref={avatarRef}>
             <OuterIconWrap>
               <PersonIcon />
-              {user.role === "premium" && (
+              {rolesForWorkout.includes(user.role) && (
                 <IconWrap>
                   <StarIcon />
                 </IconWrap>

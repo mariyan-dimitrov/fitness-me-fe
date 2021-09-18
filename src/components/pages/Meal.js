@@ -34,8 +34,22 @@ const Meal = () => {
   const cancelEdit = () => setEditModeValues({});
 
   const getAllMeals = useCallback(
-    pagination => getAll(assetTypes.meal.name, pagination).then(({ data }) => setMealRecords(data)),
-    [getAll]
+    pagination =>
+      getAll(assetTypes.meal.name, pagination).then(({ data }) => {
+        const enhancedData = data.map(item => {
+          const correspondingItem = foodRecords.find(foodRecord => foodRecord.id === item.foodId);
+
+          return correspondingItem
+            ? {
+                ...correspondingItem,
+                ...item,
+              }
+            : item;
+        });
+
+        setMealRecords(enhancedData);
+      }),
+    [getAll, foodRecords]
   );
 
   const getAllFoods = useCallback(
@@ -61,8 +75,8 @@ const Meal = () => {
   };
 
   useEffect(() => {
-    getAllMeals({ pageSize, pageNumber });
-  }, [getAllMeals, pageSize, pageNumber]);
+    foodRecords && getAllMeals({ pageSize, pageNumber });
+  }, [getAllMeals, foodRecords, pageSize, pageNumber]);
 
   useEffect(() => {
     !foodRecords && getAllFoods();
@@ -85,7 +99,6 @@ const Meal = () => {
 
       <Table
         hasActions
-        hasPagination
         csvFileName={`${i18n("CSV_FILENAMES.MEAL_RECORDS")} ${format(new Date(), dateFormat)}`}
         isLoading={!mealRecords}
         data={mealRecords || []}
@@ -104,11 +117,14 @@ const Meal = () => {
         structure={[
           {
             header: i18n("MEAL_PAGE.TYPE_OF_FOOD"),
-            accessor: ({ id }) => foodRecords.find(foodRecord => foodRecord.id === id)?.name,
+            accessor: ({ foodId }) =>
+              foodRecords.find(foodRecord => foodRecord.id === foodId)?.name,
+            sortByKey: "name",
             key: "foodId",
           },
           {
             header: i18n("MEAL_PAGE.PORTIONS"),
+            sortByKey: "portion",
             accessor: "portion",
             key: "Portion",
           },

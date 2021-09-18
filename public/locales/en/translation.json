@@ -34,6 +34,7 @@
     "DISTANCE_KM": "Distance (km)",
     "DATE": "Date",
     "RUNNING": "Running",
+    "ACTIVITY": "Activity",
     "HOW_MUCH_DID_YOU_WORKOUT": "How much did you workout?"
   },
   "MEAL_PAGE": {

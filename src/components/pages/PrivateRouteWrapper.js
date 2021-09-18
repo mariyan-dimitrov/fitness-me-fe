@@ -5,6 +5,7 @@ import styled from "styled-components/macro";
 import Paper from "@material-ui/core/Paper";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
+import { rolesForWorkout } from "../../_constants/roles";
 import useRouter from "../hooks/useRouter";
 import useRoutes from "../hooks/useRoutes";
 import Header from "../common/Header";
@@ -55,7 +56,7 @@ const PrivateRouteWrapper = () => {
               <Weight />
             </Route>
 
-            {user?.role === "premium" && (
+            {rolesForWorkout.includes(user?.role) && (
               <Route exact path={routes.workout.url}>
                 <Suspense fallback={null}>
                   <Workout />

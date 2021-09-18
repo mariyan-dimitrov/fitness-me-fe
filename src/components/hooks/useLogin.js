@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { useCallback } from "react";
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 
 import { useCookieContext } from "../contexts/CookieContext";
@@ -26,6 +27,7 @@ const useLogin = () => {
       })
         .then(({ data }) => {
           const { email, rememberMe } = payload;
+          const { role } = jwt_decode(data);
 
           rememberMe && setCookie("userToken", data);
           !rememberMe && session_storage.set("userToken", data);
@@ -33,6 +35,7 @@ const useLogin = () => {
           updateGlobalState({
             user: {
               email,
+              role,
             },
           });
           pushRoute(routes.homepage.url);

@@ -11,6 +11,7 @@ import cn from "classnames";
 
 import { useGlobalContext } from "../contexts/GlobalContext";
 import usePageNameFromUrl from "../hooks/usePageNameFromUrl";
+import { rolesForWorkout } from "../../_constants/roles";
 import hexToRgb from "../../utils/hexToRgb";
 import useRoutes from "../hooks/useRoutes";
 import useRouter from "../hooks/useRouter";
@@ -39,7 +40,7 @@ const Menu = () => {
     {
       pageName: "workout",
       Icon: FitnessCenterIcon,
-      isHidden: user?.role !== "premium",
+      isHidden: !rolesForWorkout.includes(user.role),
     },
   ];
 

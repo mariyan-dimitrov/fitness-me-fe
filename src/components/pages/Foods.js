@@ -50,10 +50,7 @@ const Foods = () => {
   };
 
   const fetchChartData = useCallback(
-    () =>
-      getAll(assetTypes.food.name).then(({ data }) => {
-        setFoodRecords(data);
-      }),
+    () => getAll(assetTypes.food.name).then(({ data }) => setFoodRecords(data)),
     [getAll]
   );
 
@@ -85,21 +82,25 @@ const Foods = () => {
           {
             header: i18n("FOOD_PAGE.NAME"),
             accessor: "name",
+            sortByKey: "name",
             key: "name",
           },
           {
             header: i18n("FOOD_PAGE.PROTEIN"),
             accessor: "protein",
+            sortByKey: "protein",
             key: "protein",
           },
           {
             header: i18n("FOOD_PAGE.CARBS"),
             accessor: "carbs",
+            sortByKey: "carbs",
             key: "carbs",
           },
           {
             header: i18n("FOOD_PAGE.FATS"),
             accessor: "fats",
+            sortByKey: "fats",
             key: "fats",
           },
           {
