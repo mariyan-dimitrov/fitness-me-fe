@@ -10,6 +10,7 @@ import WorkoutChart from "../common/WorkoutChart";
 import WorkoutForm from "../forms/WorkoutForm";
 import useApi from "../hooks/useApi";
 import Table from "../common/Table";
+import activityOptions from "../../_constants/activityOptions";
 
 const Workout = () => {
   const [removeModeValues, setRemoveModeValues] = useState({});
@@ -78,7 +79,6 @@ const Workout = () => {
       />
 
       <Table
-        hasActions
         csvFileName={`${i18n("CSV_FILENAMES.WORKOUT_RECORDS")} ${format(new Date(), dateFormat)}`}
         isLoading={!workoutRecords}
         data={workoutRecords || []}
@@ -93,7 +93,13 @@ const Workout = () => {
             sortByKey: "distance",
             key: "distance",
           },
-
+          {
+            header: i18n("WORKOUT_PAGE.ACTIVITY"),
+            accessor: ({ categoryId }) =>
+              i18n(activityOptions.find(({ value }) => value === categoryId)?.name),
+            sortByKey: "activity",
+            key: "activity",
+          },
           {
             header: i18n("WORKOUT_PAGE.DATE"),
             accessor: ({ date }) => format(date, dateFormat),

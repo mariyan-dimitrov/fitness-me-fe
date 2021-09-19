@@ -17,7 +17,7 @@ const TextField = ({ name, fullWidth, className, handleChange, ...rest }) => {
               onChange(value);
               handleChange && handleChange(value);
             }}
-            className={cn("bo-input", className)}
+            className={cn("input", className)}
             error={meta.touched && meta.error}
           />
         );

@@ -13,7 +13,7 @@ const Select = ({ name, options, label, type, ...rest }) => {
         const { onChange, ...inputProps } = input;
 
         return (
-          <FormControl fullWidth className="bo-form-row bo-form-input" variant="outlined">
+          <FormControl fullWidth className="form-row form-input" variant="outlined">
             {label && <InputLabel>{label}</InputLabel>}
             <MuiSelect
               label={label}

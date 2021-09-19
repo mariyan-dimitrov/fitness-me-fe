@@ -38,27 +38,27 @@ const Weight = () => {
       const payload = { ...values };
 
       change(assetTypes.weight.name, values.id, payload).then(() => {
-        fetchChartData();
+        fetchData();
         cancelEdit();
       });
     } else if (removeMode) {
       remove(assetTypes.weight.name, values.id).then(() => {
-        fetchChartData();
+        fetchData();
         cancelRemove();
       });
     } else {
-      create(assetTypes.weight.name, values).then(fetchChartData);
+      create(assetTypes.weight.name, values).then(fetchData);
     }
   };
 
-  const fetchChartData = useCallback(
+  const fetchData = useCallback(
     () => getAll(assetTypes.weight.name).then(({ data }) => setWeightRecords(data)),
     [getAll]
   );
 
   useEffect(() => {
-    !weightRecords && fetchChartData();
-  }, [getAll, fetchChartData, weightRecords]);
+    !weightRecords && fetchData();
+  }, [getAll, fetchData, weightRecords]);
 
   return (
     <>
@@ -75,7 +75,6 @@ const Weight = () => {
       />
 
       <Table
-        hasActions
         csvFileName={`${i18n("CSV_FILENAMES.WEIGHT_RECORDS")} ${format(new Date(), dateFormat)}`}
         isLoading={!weightRecords}
         data={weightRecords || []}

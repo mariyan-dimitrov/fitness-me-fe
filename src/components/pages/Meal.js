@@ -98,7 +98,6 @@ const Meal = () => {
       />
 
       <Table
-        hasActions
         csvFileName={`${i18n("CSV_FILENAMES.MEAL_RECORDS")} ${format(new Date(), dateFormat)}`}
         isLoading={!mealRecords}
         data={mealRecords || []}

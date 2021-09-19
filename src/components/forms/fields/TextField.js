@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, OutlinedInput as MuiTextField } from "@material-ui/core";
+import { FormControl, TextField as MuiTextField } from "@material-ui/core";
 
 import InputErrorMessage from "../../common/InputErrorMessage";
 
@@ -17,8 +17,7 @@ const TextField = ({
   const isNumber = type === "number";
 
   return (
-    <FormControl fullWidth variant="outlined" className="bo-form-row bo-form-input">
-      <InputLabel>{label}</InputLabel>
+    <FormControl fullWidth variant="outlined" className="form-row form-input">
       <MuiTextField
         label={label}
         variant="outlined"

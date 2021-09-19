@@ -25,7 +25,7 @@ const AutoComplete = ({
   };
 
   return (
-    <AutoCompleteWrapper className={cn("bo-form-row", "bo-form-input", className)}>
+    <AutoCompleteWrapper className={cn("form-row", "form-input", className)}>
       <Field name={name} type="select">
         {({ input, meta }) => {
           const { onChange, value, ...inputProps } = input;

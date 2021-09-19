@@ -1,3 +1,4 @@
 const rolesForWorkout = ["Administrator", "PremiumUser"];
+const rolesForFoodActions = ["Administrator"];
 
-export { rolesForWorkout };
+export { rolesForWorkout, rolesForFoodActions };

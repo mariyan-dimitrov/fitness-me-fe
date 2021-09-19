@@ -35,7 +35,7 @@ const FoodForm = ({
         value: name,
         rules: {
           isRequired: true,
-          notIn: foodRecords ? foodRecords.map(({ name }) => name) : [],
+          notIn: !editMode && foodRecords ? foodRecords.map(({ name }) => name) : [],
         },
         errors,
       },

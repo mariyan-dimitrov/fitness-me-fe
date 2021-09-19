@@ -23,7 +23,6 @@
     "CARBS": "Carbs (g)",
     "FATS": "Fats (g)",
     "OVERVIEW": "Overview",
-    "WHAT_DID_YOU_EAT": "What did you eat?",
     "ADD_NEW_FOOD_PRODUCT": "Add new food product",
     "CONTAINS_PER_100": "Contains per 100g",
     "EDIT_FOOD_PRODUCT": "Edit food product",
@@ -35,7 +34,9 @@
     "DATE": "Date",
     "RUNNING": "Running",
     "ACTIVITY": "Activity",
-    "HOW_MUCH_DID_YOU_WORKOUT": "How much did you workout?"
+    "HOW_MUCH_DID_YOU_WORKOUT": "How much did you workout?",
+    "EDIT_WORKOUT_RECORD": "Edit workout record",
+    "REMOVE_WORKOUT_RECORD": "Remove workout record"
   },
   "MEAL_PAGE": {
     "FOOD_NAME": "Food Name",
@@ -43,7 +44,8 @@
     "PORTIONS": "Portions",
     "TYPE_OF_FOOD": "Type of Food",
     "EDIT_MEAL_RECORD": "Edit meal record",
-    "REMOVE_MEAL_RECORD": "Remove meal record"
+    "REMOVE_MEAL_RECORD": "Remove meal record",
+    "WHAT_DID_YOU_EAT": "What did you eat?"
   },
   "MAIN_MENU": {
     "TOGGLE_THEME": "Toggle theme",
@@ -83,14 +85,7 @@
     "MUST_CONTAIN_ONLY_NUMBERS": "Must contain only numbers",
     "INVALID_EMAIL": "Invalid email",
     "MUST_NOT_CONTAIN_ANY_NUMBERS": "Must not contain any numbers",
-    "SHOULD_NOT_START_WITH_EMPTY_SPACE": "Should not start with empty space",
-    "SHOULD_NOT_CONTAIN_ANY_SPECIAL_CHARACTERS": "Should not contain any special characters",
-    "SHOULD_CONTAIN_A_NUMBER": "Should contain at least 1 number",
-    "SHOULD_CONTAIN_A_CAPITAL_LETTER": "Should contain a capital letter",
-    "TRAILING_SPACES_ARE_NOT_ALLOWED": "Trailing spaces are not allowed",
-    "INPUTS_DOESNT_MATCH": "Inputs doesn't match",
     "SHOULD_NOT_END_WITH_TRAILING_SPACES": "Should not end with trailing spaces",
-    "SHOULD_BE_BETWEEN_VALUES": "Should be a value between {{min}} and {{max}}",
     "VALUES_DONT_MATCH": "Values don't match",
     "ENTRY_ALREADY_EXISTS": "Entry already exists"
   },
@@ -100,6 +95,8 @@
     "SUBMIT": "Submit",
     "CANCEL": "Cancel",
     "REMOVE": "Remove",
+    "SEARCH": "Search",
+    "CLEAR": "Clear",
     "ARE_YOU_SURE_DELETE": "Are you sure you want to delete this entry?",
     "OPEN_MENU": "Open Menu",
     "CLOSE_MENU": "Close Menu"

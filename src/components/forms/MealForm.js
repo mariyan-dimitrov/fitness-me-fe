@@ -67,7 +67,7 @@ const MealForm = ({
       onSubmit={onSubmit}
       validate={validate}
       initialValues={{
-        date: format(new Date(), "yyyy-MM-dd'T'hh:mm"),
+        date: format(new Date(), "yyyy-MM-dd'T'k:mm"),
         ...(removeMode ? removeModeValues : editModeValues),
       }}
       render={({ handleSubmit, form, errors }) => {
@@ -85,9 +85,9 @@ const MealForm = ({
               }}
             >
               <Row className="is-aligned-center">
-                {!editMode && !removeMode && <h2>{i18n("FOOD_PAGE.WHAT_DID_YOU_EAT")}</h2>}
-                {editMode && <h2>{i18n("FOOD_PAGE.EDIT_MEAL_RECORD")}</h2>}
-                {removeMode && <h2>{i18n("FOOD_PAGE.REMOVE_MEAL_RECORD")}</h2>}
+                {!editMode && !removeMode && <h2>{i18n("MEAL_PAGE.WHAT_DID_YOU_EAT")}</h2>}
+                {editMode && <h2>{i18n("MEAL_PAGE.EDIT_MEAL_RECORD")}</h2>}
+                {removeMode && <h2>{i18n("MEAL_PAGE.REMOVE_MEAL_RECORD")}</h2>}
               </Row>
 
               <Row>

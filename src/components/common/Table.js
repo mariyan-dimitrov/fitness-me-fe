@@ -21,6 +21,7 @@ import useTranslate from "../hooks/useTranslate";
 import styled from "styled-components/macro";
 import hexToRgb from "../../utils/hexToRgb";
 import Tooltip from "./Tooltip";
+import TextField from "../forms/fields/TextField";
 
 const sortMap = {
   asc: "desc",
@@ -54,7 +55,8 @@ const Table = ({
   isLoading,
   minheight = 400,
   structure,
-  hasActions,
+  canSearch,
+  hasActions = true,
   handleEdit,
   csvFileName,
   editingRowId,
@@ -65,6 +67,7 @@ const Table = ({
   const i18n = useTranslate();
   const [sortDirection, setSortDirection] = useState("asc");
   const [visibleItems, setVisibleItems] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const [csvHeaders, setCSVHeaders] = useState([]);
   const [pageSize, setPageSize] = useState(10);
   const [sortBy, setSortBy] = useState(false);
@@ -76,6 +79,13 @@ const Table = ({
   const getVisibleItems = useCallback(
     () =>
       data
+        .filter(item =>
+          searchValue
+            ? Object.values(item).find(value =>
+                String(value).toLowerCase().includes(searchValue.toLowerCase())
+              )
+            : true
+        )
         .sort((a, b) => {
           const aSortValue = a[sortBy];
           const bSortValue = b[sortBy];
@@ -106,7 +116,7 @@ const Table = ({
           }
         })
         .filter((row, index) => index - pageSize * page >= 0 && index < pageSize * (page + 1)),
-    [data, pageSize, page, sortBy, sortDirection]
+    [data, pageSize, page, sortBy, sortDirection, searchValue]
   );
 
   useEffect(() => {
@@ -136,6 +146,21 @@ const Table = ({
 
   return (
     <StyledTableContainer component={component} elevation={3}>
+      {canSearch && (
+        <SearchWrapper>
+          <TextField
+            size="small"
+            label={i18n("GENERAL_ACTIONS.SEARCH")}
+            value={searchValue}
+            onChange={setSearchValue}
+          />
+          {searchValue && (
+            <Button variant="contained" color="primary" onClick={() => setSearchValue("")}>
+              {i18n("GENERAL_ACTIONS.CLEAR")}
+            </Button>
+          )}
+        </SearchWrapper>
+      )}
       <StyledTable stickyHeader minheight={minheight}>
         <StyledTableHead>
           <TableRow>
@@ -353,4 +378,20 @@ const TableActions = styled.div`
 const StyledCSVLink = styled(CSVLink)`
   display: inline-block;
   padding: ${({ theme }) => theme.spacing(2)}px;
+`;
+
+const SearchWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: ${({ theme }) => theme.spacing(2)}px;
+  background-color: ${({ theme }) => hexToRgb(theme.palette.secondary.dark, 0.3)};
+
+  .MuiFormControl-root {
+    max-width: 300px;
+  }
+
+  .MuiInputBase-root {
+    margin-right: ${({ theme }) => theme.spacing(2)}px;
+  }
 `;

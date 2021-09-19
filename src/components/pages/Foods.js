@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import format from "date-fns/format";
 
+import { rolesForFoodActions } from "../../_constants/roles";
+import { useGlobalContext } from "../contexts/GlobalContext";
 import dateFormat from "../../_constants/dateFormat";
 import assetTypes from "../../_constants/assetTypes";
 import useTranslate from "../hooks/useTranslate";
@@ -10,6 +12,7 @@ import useApi from "../hooks/useApi";
 import Table from "../common/Table";
 
 const Foods = () => {
+  const { user } = useGlobalContext();
   const [removeModeValues, setRemoveModeValues] = useState({});
   const [editModeValues, setEditModeValues] = useState({});
   const [foodRecords, setFoodRecords] = useState(false);
@@ -70,13 +73,14 @@ const Foods = () => {
       />
 
       <Table
-        hasActions
+        canSearch
         isLoading={!foodRecords}
         data={foodRecords || []}
         csvFileName={`${i18n("CSV_FILENAMES.MEAL_RECORDS")} ${format(new Date(), dateFormat)}`}
         handleEdit={handleStartEdit}
         handleRemove={handleStartRemove}
         editingRowId={editModeValues.id}
+        hasActions={rolesForFoodActions.includes(user.role)}
         removingRowId={removeModeValues.id}
         structure={[
           {
