@@ -20,7 +20,7 @@ const useValidateInput = () => {
         addError(i18n("FORM_VALIDATION_MESSAGES.MUST_CONTAIN_CHARACTERS", { minLength }));
       }
 
-      if (minValue && value < minValue) {
+      if ((minValue || minValue === 0) && value < minValue) {
         addError(i18n("FORM_VALIDATION_MESSAGES.MUST_BE_HIGHER_THAN", { minValue }));
       }
 

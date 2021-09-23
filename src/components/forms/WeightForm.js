@@ -34,6 +34,8 @@ const WeightForm = ({
         value: mass,
         rules: {
           isRequired: true,
+          isNumber: true,
+          minValue: 0,
         },
         errors,
       },
@@ -60,6 +62,7 @@ const WeightForm = ({
       }}
       render={({ handleSubmit, form, errors }) => {
         const hasErrors = Boolean(Object.keys(errors).length);
+        console.log("errors: ", errors);
 
         return (
           <StyledFormWrapper

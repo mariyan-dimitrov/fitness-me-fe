@@ -37,6 +37,7 @@ const WorkoutForm = ({
         rules: {
           isRequired: true,
           isNumber: true,
+          minValue: 0,
         },
         errors,
       },
