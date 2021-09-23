@@ -5,7 +5,7 @@ import format from "date-fns/format";
 import cn from "classnames";
 
 import DateTimePicker from "./final-form-fields/DateTimePicker";
-import Autocomplete from "./final-form-fields/Autocomplete";
+import AutoComplete from "./final-form-fields/Autocomplete";
 import useValidateInput from "../hooks/useValidateInput";
 import TextField from "./final-form-fields/TextField";
 import useTranslate from "../hooks/useTranslate";
@@ -176,6 +176,6 @@ const RemoveQuestion = styled.div`
   margin-right: ${({ theme }) => theme.spacing(2)}px;
 `;
 
-const StyledAutocomplete = styled(Autocomplete)`
+const StyledAutocomplete = styled(AutoComplete)`
   width: 100%;
 `;
